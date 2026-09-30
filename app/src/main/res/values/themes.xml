@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Gash" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Gash.Starting" parent="Theme.SplashScreen">
+
+        <item name="windowSplashScreenBackground">#FFFFFF</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/gash_icon_colorless</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.Gash</item>
+
+    </style>
+</resources>

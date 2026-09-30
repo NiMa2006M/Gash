@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">گاش</string>
+    <string name="app_slogan">گاش پیشرو در مدیریت مدرن صنعت دامپروری</string>
+
+    <!-- COMMON BUTTONS -->
+    <string name="common_btn_confirm">تایید</string>
+    <string name="common_btn_cancel">انصراف</string>
+    <string name="common_btn_save">ذخیره</string>
+    <string name="common_btn_edit">ویرایش</string>
+    <string name="common_btn_delete">حذف</string>
+    <string name="common_btn_back">بازگشت</string>
+    <string name="common_btn_next">بعدی</string>
+    <string name="common_btn_previous">قبلی</string>
+    <string name="common_btn_submit">ثبت</string>
+    <string name="common_btn_retry">تلاش مجدد</string>
+    <string name="common_btn_close">بستن</string>
+    <string name="common_btn_share">اشتراک‌ گذاری</string>
+    <string name="common_btn_login">ورود</string>
+
+    <!-- SETTING -->
+    <string name="settings_language_system">زبان پیش‌فرض دستگاه</string>
+    <string name="settings_language_fa">فارسی</string>
+    <string name="settings_language_en">English</string>
+
+    <!-- COMMON MESSAGES & STATES -->
+    <string name="common_msg_loading">در حال بارگذاری …</string>
+    <string name="common_msg_please_wait">لطفاً شکیبا باشید…</string>
+    <string name="common_msg_success">عملیات با موفقیت انجام شد</string>
+    <string name="common_msg_no_data">اطلاعاتی برای نمایش وجود ندارد</string>
+
+    <!-- COMMON ERRORS -->
+    <string name="common_error_network">اتصال اینترنت خود را بررسی کنید</string>
+    <string name="common_error_server">خطایی در ارتباط با سرور رخ داده است</string>
+    <string name="common_error_timeout">زمان پاسخ‌گویی سرور به پایان رسید</string>
+    <string name="common_error_unknown">خطای ناشناخته‌ای رخ داده است</string>
+    <string name="common_error_required_field">این فیلد الزامی است</string>
+
+    <!-- COMMON DIALOGS -->
+    <string name="common_dialog_warning_title">هشدار</string>
+    <string name="common_dialog_error_title">خطا</string>
+    <string name="common_dialog_delete_confirm_title">تایید حذف</string>
+    <string name="common_dialog_delete_confirm_msg">آیا از حذف این مورد اطمینان دارید؟</string>
+
+    <!--ACTIVATION -->
+    <string name="activation_form_title">ورود به حساب کاربری</string>
+    <string name="activation_form_farmName">نام دامداری رو وارد کنید</string>
+    <string name="activation_form_farmId">شناسه دامداری رو وارد کنید</string>
+    <string name="activation_form_phoneNumber">شماره همراه خود رو وارد کنید</string>
+    <string name="activation_form_requestCode">دریافت کد تایید</string>
+    <string name="activation_form_fillAllFields">همه‌ی فیلدها را پر کنید</string>
+
+    <string name="activation_code_title">کد دریافتی را وارد کنید</string>
+    <string name="activation_code_codeSendTo">کد تایید به شماره %1$s ارسال شد</string>
+    <string name="activation_code_wrongCode">کد رو اشتباه وارد کردی!</string>
+    <string name="activation_code_resendCode">دریافت مجدد کد تایید</string>
+    <string name="activation_code_codeRemainingTime">کد تا %1$02d:%2$02d دیگر برای شما ارسال خواهد شد</string>
+
+    <string name="activation_success">فعال‌سازی موفق! صفحه‌ی Home بعداً اینجا میاد</string>
+
+    <!-- ERROR -->
+    <string name="error_empty_rfid_code">کد RFID نمی‌تواند خالی باشد</string>
+    <string name="error_empty_herd_name">نام گله نمی‌تواند خالی باشد</string>
+    <string name="error_rfid_assignment_failed">اتصال تگ RFID ناموفق بود. دوباره تلاش کنید.</string>
+    <string name="error_animal_not_found">دام مورد نظر پیدا نشد</string>
+    <string name="error_animal_expired">این دام منقضی‌شده است و نمی‌تواند تگ جدید بگیرد</string>
+
+    <!-- HOME -->
+    <string name="operation_milking">شیردوشی</string>
+    <string name="operation_cidr">سیدرگذاری</string>
+    <string name="operation_vaccination">واکسن</string>
+    <string name="operation_ultrasound">سونوگرافی</string>
+    <string name="operation_hoof_trimming">سم چینی</string>
+    <string name="operation_drying">خشکی</string>
+    <string name="operation_insemination">تلقیح</string>
+    <string name="operation_weaning">قطع شیر</string>
+    <string name="operation_disease">بیماری</string>
+
+    <string name="home_shortcut_weight">وزن گیری دام</string>
+    <string name="home_shortcut_operations_census">عملیات و سرشماری</string>
+    <string name="home_shortcut_herd_management">مدیریت گله</string>
+
+    <string name="home_device_reference">شناسه موبایل وارد شده %1$s</string>
+    <string name="home_total_animals_label">تعداد کل گوسفندان</string>
+    <string name="home_total_animals_count">%1$d راس</string>
+
+    <string name="bottom_nav_file_transfer">ارسال فایل</string>
+    <string name="bottom_nav_account">حساب کاربری</string>
+    <string name="bottom_nav_operations">عملیات ها</string>
+
+    <!-- HERD MANAGEMENT-->
+    <string name="herd_management_title">مدیریت گله</string>
+    <string name="herd_management_animal_count">%1$d راس</string>
+    <string name="herd_management_empty">هنوز هیچ گله‌ای ثبت نشده</string>
+    <string name="common_btn_add">افزودن</string>
+    <string name="herd_management_add_dialog_title">افزودن گله جدید</string>
+    <string name="herd_management_rename_dialog_title">ویرایش نام گله</string>
+    <string name="herd_name_hint">نام گله</string>
+    <string name="herd_management_delete_dialog_title">حذف گله</string>
+    <string name="herd_management_delete_dialog_message">گله‌ی «%1$s» حذف بشه؟ دام‌های این گله پاک نمی‌شن، فقط بی‌گله می‌مونن.</string>
+    <string name="herd_menu_rename">ویرایش نام</string>
+    <string name="herd_menu_delete">حذف</string>
+
+    <string name="account_placeholder">صفحه‌ی حساب کاربری به‌زودی اینجا میاد</string>
+    <string name="file_transfer_placeholder">صفحه‌ی ارسال فایل به‌زودی اینجا میاد</string>
+
+    <string name="herd_management_placeholder">صفحه‌ی مدیریت گله به‌زودی اینجا میاد</string>
+    <string name="weight_placeholder">صفحه‌ی وزن‌کشی به‌زودی اینجا میاد</string>
+</resources>
