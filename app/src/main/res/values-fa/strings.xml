@@ -64,6 +64,7 @@
     <string name="error_rfid_assignment_failed">اتصال تگ RFID ناموفق بود. دوباره تلاش کنید.</string>
     <string name="error_animal_not_found">دام مورد نظر پیدا نشد</string>
     <string name="error_animal_expired">این دام منقضی‌شده است و نمی‌تواند تگ جدید بگیرد</string>
+    <string name="error_invalid_weight">وزن باید عددی مثبت باشد</string>
 
     <!-- HOME -->
     <string name="operation_milking">شیردوشی</string>

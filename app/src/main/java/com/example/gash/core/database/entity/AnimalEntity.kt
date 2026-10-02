@@ -5,7 +5,6 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-
 @Entity(
     tableName = "animals",
     foreignKeys = [
@@ -23,5 +22,8 @@ data class AnimalEntity(
     val id: Long = 0,
     val herdId: Long?,
     val createdAt: Long,
-    val expiredAt : Long?
+    val expiredAt: Long? = null,
+    val tag1: String? = null,
+    val tag2: String? = null,
+    val tag3: String? = null
 )

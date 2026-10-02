@@ -7,6 +7,9 @@ fun AnimalEntity.toDomain(activeRfidCode: String? = null): Animal = Animal(
     id = id,
     herdId = herdId,
     createdAt = createdAt,
+    expiredAt = expiredAt,
     activeRfidCode = activeRfidCode,
-    expiredAt = expiredAt
+    tag1 = tag1,
+    tag2 = tag2,
+    tag3 = tag3
 )

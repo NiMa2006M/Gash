@@ -63,6 +63,7 @@
     <string name="error_rfid_assignment_failed">Failed to assign the RFID tag. Please try again.</string>
     <string name="error_animal_not_found">Animal not found</string>
     <string name="error_animal_expired">This animal is marked as expired and cannot receive a new tag</string>
+    <string name="error_invalid_weight">Weight must be a positive number</string>
 
     <!-- HOME -->
     <string name="operation_milking">Milking</string>

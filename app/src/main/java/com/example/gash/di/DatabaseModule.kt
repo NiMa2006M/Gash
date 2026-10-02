@@ -6,6 +6,7 @@ import com.example.gash.core.database.AppDatabase
 import com.example.gash.core.database.dao.AnimalDao
 import com.example.gash.core.database.dao.HerdDao
 import com.example.gash.core.database.dao.RfidTagDao
+import com.example.gash.core.database.dao.WeightRecordDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,4 +33,7 @@ object DatabaseModule {
 
     @Provides
     fun provideRfidTagDao(db: AppDatabase): RfidTagDao = db.rfidTagDao()
+
+    @Provides
+    fun provideWeightRecordDao(db: AppDatabase): WeightRecordDao = db.weightRecordDao()
 }

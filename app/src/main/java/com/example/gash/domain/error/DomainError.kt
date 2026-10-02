@@ -9,6 +9,7 @@ sealed class DomainError(cause: Throwable? = null) : Exception(cause) {
     data object AnimalNotFound : DomainError()
     data object AnimalExpired : DomainError()
     data object EmptyHerdName : DomainError()
+    data object InvalidWeight : DomainError()
 
     class Unknown(cause: Throwable? = null) : DomainError(cause)
 }
