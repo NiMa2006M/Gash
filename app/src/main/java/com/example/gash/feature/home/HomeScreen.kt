@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     uiState: HomeUiState,
+    onNavigateToHerdDetail: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(initialPage = HomePage.OPERATIONS.ordinal) { HomePage.entries.size }
@@ -49,7 +50,7 @@ fun HomeScreen(
             when (HomePage.entries[pageIndex]) {
                 HomePage.WEIGHT -> WeightScreen()
                 HomePage.OPERATIONS -> HomeOperationsPage()
-                HomePage.HERD_MANAGEMENT -> HerdManagementScreen()
+                HomePage.HERD_MANAGEMENT -> HerdManagementScreen(onHerdClick = onNavigateToHerdDetail)
             }
         }
     }

@@ -17,6 +17,7 @@
     <string name="common_btn_close">بستن</string>
     <string name="common_btn_share">اشتراک‌ گذاری</string>
     <string name="common_btn_login">ورود</string>
+    <string name="common_btn_more">بیشتر</string>
 
     <!-- SETTING -->
     <string name="settings_language_system">زبان پیش‌فرض دستگاه</string>
@@ -92,7 +93,8 @@
     <!-- HERD MANAGEMENT-->
     <string name="herd_management_title">مدیریت گله</string>
     <string name="herd_management_animal_count">%1$d راس</string>
-    <string name="herd_management_empty">هنوز هیچ گله‌ای ثبت نشده</string>
+    <string name="herd_management_empty_title">هنوز هیچ گله‌ای ثبت نشده</string>
+    <string name="herd_management_empty_description">اولین گله‌ی دامداری خود را ایجاد کنید</string>
     <string name="common_btn_add">افزودن</string>
     <string name="herd_management_add_dialog_title">افزودن گله جدید</string>
     <string name="herd_management_rename_dialog_title">ویرایش نام گله</string>
@@ -102,9 +104,28 @@
     <string name="herd_menu_rename">ویرایش نام</string>
     <string name="herd_menu_delete">حذف</string>
 
+    <!-- HERD DETAIL -->
+    <string name="animal_list_item_title">دام #%1$d</string>
+    <string name="animal_list_item_rfid">RFID: %1$s</string>
+    <string name="animal_list_item_no_rfid">بدون RFID</string>
+    <string name="herd_detail_add_sheet_title">افزودن دام به این گله</string>
+    <string name="herd_detail_add_existing">انتخاب از دام‌های بی‌گله</string>
+    <string name="herd_detail_add_existing_desc">دام‌هایی که از قبل ثبت شدن ولی گله ندارن</string>
+    <string name="herd_detail_add_new">ثبت دام جدید</string>
+    <string name="herd_detail_add_new_desc">یه دام کاملاً جدید اضافه کن</string>
+    <string name="herd_detail_add_excel">وارد کردن از فایل اکسل</string>
+    <string name="herd_detail_add_excel_soon">به‌زودی - هنوز آماده نیست</string>
+    <string name="herd_detail_pick_existing_title">انتخاب دام‌های بی‌گله</string>
+    <string name="herd_detail_no_unassigned_animals">هیچ دام بی‌گله‌ای نیست</string>
+    <string name="herd_detail_register_new_title">ثبت دام جدید</string>
+    <string name="herd_detail_rfid_optional_hint">کد RFID (اختیاری)</string>
+    <string name="herd_detail_empty_animals">این گله هنوز دامی نداره</string>
+
     <string name="account_placeholder">صفحه‌ی حساب کاربری به‌زودی اینجا میاد</string>
     <string name="file_transfer_placeholder">صفحه‌ی ارسال فایل به‌زودی اینجا میاد</string>
 
     <string name="herd_management_placeholder">صفحه‌ی مدیریت گله به‌زودی اینجا میاد</string>
     <string name="weight_placeholder">صفحه‌ی وزن‌کشی به‌زودی اینجا میاد</string>
+
+
 </resources>

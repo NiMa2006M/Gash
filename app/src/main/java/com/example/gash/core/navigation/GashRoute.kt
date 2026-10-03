@@ -22,7 +22,13 @@ sealed interface GashRoute {
 
     @Serializable
     data object FileTransfer : GashRoute
-    // demo
+
+    @Serializable
+    data class HerdDetail(val herdId: Long) : GashRoute
+
+    // Demo Animal detail
     // @Serializable
-    // data class HerdDetail(val herdId: Long) : GashRoute
+    // data class AnimalDetail(val animalId: Long) : GashRoute
+
 }
+

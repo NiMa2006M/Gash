@@ -23,6 +23,11 @@ class HerdRepositoryImpl @Inject constructor(
             }
         }
 
+    override fun observeHerd(herdId: Long): Flow<Herd?> =
+        combine(herdDao.observeById(herdId), animalDao.observeCountByHerd(herdId)) { entity, count ->
+            entity?.toDomain(animalCount = count)
+        }
+
     override suspend fun getHerd(id: Long): Herd? =
         herdDao.getById(id)?.toDomain()
 
@@ -37,4 +42,6 @@ class HerdRepositoryImpl @Inject constructor(
     override suspend fun deleteHerd(id: Long) {
         herdDao.deleteById(id)
     }
+
+
 }

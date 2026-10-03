@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface AnimalRepository {
     fun observeAnimals(): Flow<List<Animal>>
     fun observeAnimalsByHerd(herdId: Long): Flow<List<Animal>>
+    fun observeUnassignedAnimals(): Flow<List<Animal>>
     fun observeExpiredAnimals(): Flow<List<Animal>>
     fun observeTotalCount(): Flow<Int>
     suspend fun getAnimal(id: Long): Animal?

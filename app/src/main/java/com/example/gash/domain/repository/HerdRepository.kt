@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface HerdRepository {
     fun observeHerds(): Flow<List<Herd>>
+    fun observeHerd(herdId: Long): Flow<Herd?>
+
     suspend fun getHerd(id: Long): Herd?
     suspend fun addHerd(name: String): Long
     suspend fun renameHerd(id: Long, newName: String)

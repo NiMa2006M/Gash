@@ -29,4 +29,7 @@ interface HerdDao {
 
     @Query("DELETE FROM herds WHERE id = :id")
     suspend fun deleteById(id: Long)
+
+    @Query("SELECT * FROM herds WHERE id = :herdId")
+    fun observeById(herdId: Long): Flow<HerdEntity?>
 }

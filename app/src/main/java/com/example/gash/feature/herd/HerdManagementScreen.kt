@@ -34,6 +34,7 @@ import com.example.gash.ui.theme.GashTextSecondary
 
 @Composable
 fun HerdManagementScreen(
+    onHerdClick: (Long) -> Unit,
     viewModel: HerdManagementViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -64,7 +65,7 @@ fun HerdManagementScreen(
 
         if (uiState.herds.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = stringResource(R.string.herd_management_empty), color = GashTextSecondary)
+                HerdEmptyState()
             }
         } else {
             LazyColumn(
@@ -75,6 +76,7 @@ fun HerdManagementScreen(
                 items(items = uiState.herds, key = { it.id }) { herd ->
                     HerdCard(
                         herd = herd,
+                        onClick = { onHerdClick(herd.id) },
                         onRenameClick = { viewModel.onRenameClick(herd) },
                         onDeleteClick = { viewModel.onDeleteClick(herd) }
                     )

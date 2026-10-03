@@ -16,6 +16,8 @@
     <string name="common_btn_close">Close</string>
     <string name="common_btn_share">Share</string>
     <string name="common_btn_login">Login</string>
+    <string name="common_btn_more">More</string>
+
 
     <!-- SETTING -->
     <string name="settings_language_system">Device default</string>
@@ -91,7 +93,8 @@
     <!-- HERD MANAGEMENT-->
     <string name="herd_management_title">Herd Management</string>
     <string name="herd_management_animal_count">%1$d head</string>
-    <string name="herd_management_empty">No herds have been added yet</string>
+    <string name="herd_management_empty_title">No herds have been added yet</string>
+    <string name="herd_management_empty_description">Establish your first livestock herd</string>
     <string name="common_btn_add">Add</string>
     <string name="herd_management_add_dialog_title">Add New Herd</string>
     <string name="herd_management_rename_dialog_title">Rename Herd</string>
@@ -100,6 +103,23 @@
     <string name="herd_management_delete_dialog_message">Delete herd "%1$s"? Its animals won\'t be deleted, they\'ll just become unassigned.</string>
     <string name="herd_menu_rename">Rename</string>
     <string name="herd_menu_delete">Delete</string>
+
+    <!-- HERD DETAIL -->
+    <string name="animal_list_item_title">Animal #%1$d</string>
+    <string name="animal_list_item_rfid">RFID: %1$s</string>
+    <string name="animal_list_item_no_rfid">No RFID</string>
+    <string name="herd_detail_add_sheet_title">Add Animal to Herd</string>
+    <string name="herd_detail_add_existing">Pick from unassigned animals</string>
+    <string name="herd_detail_add_existing_desc">Animals already registered but without a herd</string>
+    <string name="herd_detail_add_new">Register New Animal</string>
+    <string name="herd_detail_add_new_desc">Add a completely new animal</string>
+    <string name="herd_detail_add_excel">Import from Excel</string>
+    <string name="herd_detail_add_excel_soon">Coming soon - not ready yet</string>
+    <string name="herd_detail_pick_existing_title">Select Unassigned Animals</string>
+    <string name="herd_detail_no_unassigned_animals">No unassigned animals</string>
+    <string name="herd_detail_register_new_title">Register New Animal</string>
+    <string name="herd_detail_rfid_optional_hint">RFID code (optional)</string>
+    <string name="herd_detail_empty_animals">This herd has no animals yet</string>
 
     <string name="account_placeholder">Account screen coming soon</string>
     <string name="file_transfer_placeholder">File transfer screen coming soon</string>

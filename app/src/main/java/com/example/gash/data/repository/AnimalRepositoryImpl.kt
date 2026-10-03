@@ -1,7 +1,5 @@
 package com.example.gash.data.repository
 
-import androidx.room.withTransaction
-import com.example.gash.core.database.AppDatabase
 import com.example.gash.core.database.dao.AnimalDao
 import com.example.gash.core.database.dao.RfidTagDao
 import com.example.gash.core.database.entity.AnimalEntity
@@ -14,15 +12,19 @@ import javax.inject.Inject
 
 class AnimalRepositoryImpl @Inject constructor(
     private val animalDao: AnimalDao,
-    private val rfidTagDao: RfidTagDao,
-    private val database: AppDatabase
+    private val rfidTagDao: RfidTagDao
 ) : AnimalRepository {
 
     override fun observeAnimals(): Flow<List<Animal>> =
         animalDao.observeAll().map { list -> list.map { it.toDomain() } }
 
     override fun observeAnimalsByHerd(herdId: Long): Flow<List<Animal>> =
-        animalDao.observeByHerd(herdId).map { list -> list.map { it.toDomain() } }
+        animalDao.observeByHerdWithRfid(herdId).map { rows ->
+            rows.map { row -> row.animal.toDomain(activeRfidCode = row.activeRfidCode) }
+        }
+
+    override fun observeUnassignedAnimals(): Flow<List<Animal>> =
+        animalDao.observeUnassigned().map { list -> list.map { it.toDomain() } }
 
     override fun observeExpiredAnimals(): Flow<List<Animal>> =
         animalDao.observeExpired().map { list -> list.map { it.toDomain() } }
@@ -43,12 +45,10 @@ class AnimalRepositoryImpl @Inject constructor(
     }
 
     override suspend fun expireAnimal(animalId: Long, expiredAt: Long) {
-        database.withTransaction {
-            animalDao.setExpiredAt(animalId, expiredAt)
-            val activeTag = rfidTagDao.getActiveByAnimal(animalId)
-            if (activeTag != null) {
-                rfidTagDao.deactivate(activeTag.id, expiredAt)
-            }
+        animalDao.setExpiredAt(animalId, expiredAt)
+        val activeTag = rfidTagDao.getActiveByAnimal(animalId)
+        if (activeTag != null) {
+            rfidTagDao.deactivate(activeTag.id, expiredAt)
         }
     }
 

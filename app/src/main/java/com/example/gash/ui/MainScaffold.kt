@@ -34,9 +34,8 @@ import com.example.gash.feature.home.homeScreen
 import com.example.gash.ui.theme.GashOrange
 
 @Composable
-fun MainScaffold() {
+fun MainScaffold(onNavigateToHerdDetail: (Long) -> Unit) {
     val navController = rememberNavController()
-
     Scaffold(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = { MainBottomBar(navController) }
@@ -46,13 +45,12 @@ fun MainScaffold() {
             startDestination = GashRoute.Home,
             modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding())
         ) {
-            homeScreen()
+            homeScreen(onNavigateToHerdDetail = onNavigateToHerdDetail)
             accountScreen()
             fileTransferScreen()
         }
     }
 }
-
 @Composable
 private fun MainBottomBar(navController: NavHostController) {
     val backStackEntry by navController.currentBackStackEntryAsState()
