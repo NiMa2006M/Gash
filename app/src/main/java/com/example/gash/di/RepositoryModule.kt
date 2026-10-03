@@ -10,11 +10,13 @@ import com.example.gash.data.repository.ActivationRepositoryImpl
 import com.example.gash.data.repository.AnimalRepositoryImpl
 import com.example.gash.data.repository.HerdRepositoryImpl
 import com.example.gash.data.repository.RfidTagRepositoryImpl
+import com.example.gash.data.repository.TagSettingsRepositoryImpl
 import com.example.gash.data.repository.WeightRecordRepositoryImpl
 import com.example.gash.domain.repository.ActivationRepository
 import com.example.gash.domain.repository.AnimalRepository
 import com.example.gash.domain.repository.HerdRepository
 import com.example.gash.domain.repository.RfidTagRepository
+import com.example.gash.domain.repository.TagSettingsRepository
 import com.example.gash.domain.repository.WeightRecordRepository
 
 import dagger.Binds
@@ -59,4 +61,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindWeightRecordRepository(impl: WeightRecordRepositoryImpl): WeightRecordRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTagSettingsRepository(impl: TagSettingsRepositoryImpl): TagSettingsRepository
 }
