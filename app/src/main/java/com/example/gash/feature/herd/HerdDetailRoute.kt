@@ -17,6 +17,7 @@ fun HerdDetailRoute(
         uiState = uiState,
         onBack = onBack,
         onAnimalClick = onAnimalClick,
+        onSearchQueryChange = viewModel::onSearchQueryChange,
         onAddClick = viewModel::onAddClick,
         onDismissAddSheet = viewModel::onDismissAddSheet,
         onPickExistingSelected = viewModel::onPickExistingSelected,

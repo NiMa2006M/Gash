@@ -7,6 +7,8 @@ import com.example.gash.ui.helper.UiText
 data class HerdDetailUiState(
     val herd: Herd? = null,
     val animals: List<Animal> = emptyList(),
+    val searchQuery: String = "",
+    val filteredAnimals: List<Animal> = emptyList(),
     val addSheetMode: AddAnimalMode? = null,
     val unassignedAnimals: List<Animal> = emptyList(),
     val selectedUnassignedIds: Set<Long> = emptySet(),

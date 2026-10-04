@@ -18,6 +18,8 @@
     <string name="common_btn_share">اشتراک‌ گذاری</string>
     <string name="common_btn_login">ورود</string>
     <string name="common_btn_more">بیشتر</string>
+    <string name="common_btn_clear">پاک کردن</string>
+
 
     <!-- SETTING -->
     <string name="settings_language_system">زبان پیش‌فرض دستگاه</string>
@@ -120,6 +122,8 @@
     <string name="herd_detail_register_new_title">ثبت دام جدید</string>
     <string name="herd_detail_rfid_optional_hint">کد RFID (اختیاری)</string>
     <string name="herd_detail_empty_animals">این گله هنوز دامی نداره</string>
+    <string name="herd_detail_search_hint">جستجو بر اساس شماره دام، RFID یا تگ</string>
+    <string name="herd_detail_no_search_results">هیچ دامی با این مشخصات پیدا نشد</string>
 
     <string name="account_placeholder">صفحه‌ی حساب کاربری به‌زودی اینجا میاد</string>
     <string name="file_transfer_placeholder">صفحه‌ی ارسال فایل به‌زودی اینجا میاد</string>

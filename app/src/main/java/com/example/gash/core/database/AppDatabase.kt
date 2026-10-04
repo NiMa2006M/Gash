@@ -18,7 +18,7 @@ import com.example.gash.core.database.entity.WeightRecordEntity
         RfidTagEntity::class,
         WeightRecordEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {

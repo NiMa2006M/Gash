@@ -17,6 +17,7 @@
     <string name="common_btn_share">Share</string>
     <string name="common_btn_login">Login</string>
     <string name="common_btn_more">More</string>
+    <string name="common_btn_clear">Clear</string>
 
 
     <!-- SETTING -->
@@ -120,6 +121,8 @@
     <string name="herd_detail_register_new_title">Register New Animal</string>
     <string name="herd_detail_rfid_optional_hint">RFID code (optional)</string>
     <string name="herd_detail_empty_animals">This herd has no animals yet</string>
+    <string name="herd_detail_search_hint">Search by animal ID, RFID, or tag</string>
+    <string name="herd_detail_no_search_results">No animals matched your search</string>
 
     <string name="account_placeholder">Account screen coming soon</string>
     <string name="file_transfer_placeholder">File transfer screen coming soon</string>

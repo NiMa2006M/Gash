@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.gash.core.navigation.GashRoute
+import com.example.gash.domain.model.Animal
 import com.example.gash.domain.usecase.animal.GetAnimalsUseCase
 import com.example.gash.domain.usecase.animal.GetUnassignedAnimalsUseCase
 import com.example.gash.domain.usecase.animal.MoveAnimalToHerdUseCase
@@ -12,9 +13,11 @@ import com.example.gash.domain.usecase.animal.RegisterAnimalUseCase
 import com.example.gash.domain.usecase.herd.ObserveHerdUseCase
 import com.example.gash.ui.helper.toUiText
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,16 +37,45 @@ class HerdDetailViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(HerdDetailUiState())
     val uiState: StateFlow<HerdDetailUiState> = _uiState.asStateFlow()
 
+    private val searchQuery = MutableStateFlow("")
+
+    private var unassignedJob: Job? = null
+
     init {
         viewModelScope.launch {
             observeHerdUseCase(herdId).collect { herd ->
                 _uiState.update { it.copy(herd = herd) }
             }
         }
+
         viewModelScope.launch {
-            getAnimalsUseCase(herdId).collect { animals ->
-                _uiState.update { it.copy(animals = animals) }
+            combine(getAnimalsUseCase(herdId), searchQuery) { animals, query ->
+                animals to query
+            }.collect { (animals, query) ->
+                _uiState.update {
+                    it.copy(
+                        animals = animals,
+                        searchQuery = query,
+                        filteredAnimals = filterAnimals(animals, query)
+                    )
+                }
             }
+        }
+    }
+
+    fun onSearchQueryChange(query: String) {
+        searchQuery.value = query
+    }
+
+    private fun filterAnimals(animals: List<Animal>, query: String): List<Animal> {
+        val normalized = query.trim()
+        if (normalized.isEmpty()) return animals
+        return animals.filter { animal ->
+            animal.id.toString().contains(normalized) ||
+                    animal.activeRfidCode?.contains(normalized, ignoreCase = true) == true ||
+                    animal.tag1?.contains(normalized, ignoreCase = true) == true ||
+                    animal.tag2?.contains(normalized, ignoreCase = true) == true ||
+                    animal.tag3?.contains(normalized, ignoreCase = true) == true
         }
     }
 
@@ -52,14 +84,22 @@ class HerdDetailViewModel @Inject constructor(
     }
 
     fun onDismissAddSheet() {
+        unassignedJob?.cancel()
+        unassignedJob = null
         _uiState.update {
-            it.copy(addSheetMode = null, selectedUnassignedIds = emptySet(), error = null)
+            it.copy(
+                addSheetMode = null,
+                selectedUnassignedIds = emptySet(),
+                unassignedAnimals = emptyList(),
+                error = null
+            )
         }
     }
 
     fun onPickExistingSelected() {
         _uiState.update { it.copy(addSheetMode = AddAnimalMode.PickExisting) }
-        viewModelScope.launch {
+        unassignedJob?.cancel()
+        unassignedJob = viewModelScope.launch {
             getUnassignedAnimalsUseCase().collect { animals ->
                 _uiState.update { it.copy(unassignedAnimals = animals) }
             }
@@ -87,8 +127,15 @@ class HerdDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isSubmitting = true) }
             ids.forEach { animalId -> moveAnimalToHerdUseCase(animalId, herdId) }
+            unassignedJob?.cancel()
+            unassignedJob = null
             _uiState.update {
-                it.copy(isSubmitting = false, addSheetMode = null, selectedUnassignedIds = emptySet())
+                it.copy(
+                    isSubmitting = false,
+                    addSheetMode = null,
+                    selectedUnassignedIds = emptySet(),
+                    unassignedAnimals = emptyList()
+                )
             }
         }
     }

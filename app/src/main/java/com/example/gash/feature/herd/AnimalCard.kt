@@ -2,6 +2,7 @@ package com.example.gash.feature.herd
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -70,7 +71,7 @@ fun AnimalCard(
         ) {
             Box(
                 modifier = Modifier
-                    .size(56.dp)
+                    .size(48.dp)
                     .clip(CircleShape)
                     .background(GashGreen.copy(alpha = 0.12f)),
                 contentAlignment = Alignment.Center
@@ -92,13 +93,13 @@ fun AnimalCard(
                         animal.id
                     ),
                     color = GashTextPrimary,
-                    fontSize = 14.sp,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(0.dp))
 
                 RfidBadge(rfidCode = animal.activeRfidCode)
             }

@@ -16,7 +16,10 @@ import androidx.room.PrimaryKey
         )
     ],
     indices = [
-        Index("code"),
+        Index(
+            value = ["code"],
+            unique = true
+        ),
         Index("animalId")
 
     ])
