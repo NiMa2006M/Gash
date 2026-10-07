@@ -38,9 +38,7 @@ import com.example.gash.R
 import com.example.gash.ui.theme.GashError_RED
 import com.example.gash.ui.theme.GashFieldBackground
 import com.example.gash.ui.theme.GashGreen
-import com.example.gash.ui.theme.GashOrange
 import com.example.gash.ui.theme.GashTextPrimary
-import com.example.gash.ui.theme.GashTextSecondary
 
 @Composable
 fun AnimalDetailScreen(

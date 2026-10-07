@@ -1,8 +1,6 @@
 package com.example.gash.feature.activation
 
-import android.R.attr.maxHeight
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
