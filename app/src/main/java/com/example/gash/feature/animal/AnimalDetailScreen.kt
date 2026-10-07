@@ -1,5 +1,7 @@
 package com.example.gash.feature.animal
 
+import android.R.attr.icon
+import android.R.id.icon
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,6 +11,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -30,11 +34,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gash.R
+import com.example.gash.ui.theme.GashBackground_GRAY
 import com.example.gash.ui.theme.GashError_RED
 import com.example.gash.ui.theme.GashFieldBackground
 import com.example.gash.ui.theme.GashGreen
@@ -58,7 +64,10 @@ fun AnimalDetailScreen(
     val animal = uiState.animal
     val isExpired = animal?.expiredAt != null
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(GashBackground_GRAY)
+    ) {
         Column(modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())) {
             Column(
                 modifier = Modifier
@@ -98,12 +107,12 @@ fun AnimalDetailScreen(
                     }
                 }
             }
-
+            Spacer(Modifier.height(6.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
-                    .offset(y = (-16).dp)
+//                    .offset(y = (-16).dp)
                     .background(Color.White, RoundedCornerShape(16.dp))
                     .padding(vertical = 16.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
@@ -125,9 +134,15 @@ fun AnimalDetailScreen(
                 )
             }
 
-            Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp, vertical = 8.dp)
+                    .background(Color.White, RoundedCornerShape(16.dp))
+            ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 6.dp, vertical = 4.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -145,13 +160,16 @@ fun AnimalDetailScreen(
 
                 WeightHistoryChart(
                     history = uiState.weightHistory,
-                    modifier = Modifier.background(GashFieldBackground, RoundedCornerShape(14.dp))
+                    modifier = Modifier.background(Color.White, RoundedCornerShape(14.dp))
                 )
             }
         }
 
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .navigationBarsPadding()
+                .padding(horizontal = 20.dp, vertical = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             OutlinedButton(
@@ -210,7 +228,15 @@ private fun AnimalAvatar(animalId: Long) {
         modifier = Modifier.size(56.dp).background(Color.White, CircleShape),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "#$animalId", color = GashGreen, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+//        Text(text = "#$animalId", color = GashGreen, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+        Icon(
+            painter = painterResource(
+                R.drawable.icon_herd_management
+            ),
+            contentDescription = null,
+            tint = GashGreen,
+            modifier = Modifier.size(28.dp)
+        )
     }
 }
 

@@ -22,6 +22,7 @@ val GashBtn_PALEGREEN = Color(0xFF7EA04C)
 // BACKGROUND
 val GashBackground_WHITE = Color(0xFFFFFFFF)
 val GashBackground_FUNGREEN = Color(0xFF327236)
+val GashBackground_GRAY = Color(0xFFF2F3F5)
 
 // Feedback
 val GashError_RED = Color(0xFFBA1A1A)
