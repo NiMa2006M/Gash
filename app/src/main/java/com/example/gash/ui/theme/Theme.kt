@@ -4,6 +4,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
 
 private val GashLightColorScheme = lightColorScheme(
     primary = GashOrange,
@@ -52,9 +55,20 @@ fun GashTheme(
         GashLightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+    val density = LocalDensity.current
+
+    val limitedDensity = Density(
+        density = density.density,
+        fontScale = density.fontScale.coerceAtMost(1.0f)
     )
+
+    CompositionLocalProvider(
+        LocalDensity provides limitedDensity
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }

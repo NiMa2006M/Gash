@@ -8,6 +8,7 @@ sealed class DomainError(cause: Throwable? = null) : Exception(cause) {
     class RfidAssignmentFailed(cause: Throwable? = null) : DomainError(cause)
     data object AnimalNotFound : DomainError()
     data object AnimalExpired : DomainError()
+    data object RfidCodeActiveOnAnotherAnimal : DomainError()
     data object EmptyHerdName : DomainError()
     data object InvalidWeight : DomainError()
 

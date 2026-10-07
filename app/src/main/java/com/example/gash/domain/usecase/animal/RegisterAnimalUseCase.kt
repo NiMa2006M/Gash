@@ -6,7 +6,6 @@ import com.example.gash.domain.error.DomainError
 import com.example.gash.domain.repository.AnimalRepository
 import com.example.gash.domain.repository.RfidTagRepository
 import javax.inject.Inject
-
 class RegisterAnimalUseCase @Inject constructor(
     private val animalRepository: AnimalRepository,
     private val rfidTagRepository: RfidTagRepository,
@@ -14,23 +13,24 @@ class RegisterAnimalUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(herdId: Long?, rfidCode: String?): Result<Long> {
         return try {
-            database.withTransaction {
-                val animalId = animalRepository.registerAnimal(herdId)
+            val animalId = database.withTransaction {
+                val id = animalRepository.registerAnimal(herdId)
 
                 if (!rfidCode.isNullOrBlank()) {
-                    val assignResult = rfidTagRepository.assignTagToAnimal(rfidCode.trim(), animalId)
+                    val assignResult = rfidTagRepository.assignTagToAnimal(rfidCode.trim(), id)
                     if (assignResult.isFailure) {
                         val cause = assignResult.exceptionOrNull()
-                        val error = cause as? DomainError ?: DomainError.RfidAssignmentFailed(cause)
-                        return@withTransaction Result.failure(error)
+                        throw cause as? DomainError ?: DomainError.RfidAssignmentFailed(cause)
                     }
                 }
-                return@withTransaction Result.success(animalId)
+
+                id
             }
-
+            Result.success(animalId)
+        } catch (e: DomainError) {
+            Result.failure(e)
         } catch (e: Exception) {
-            Result.failure(DomainError.RfidAssignmentFailed(e))
+            Result.failure(DomainError.Unknown(e))
         }
-
     }
 }

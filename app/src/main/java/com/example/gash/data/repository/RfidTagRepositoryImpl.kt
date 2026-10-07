@@ -23,11 +23,10 @@ class RfidTagRepositoryImpl @Inject constructor(
     override suspend fun assignTagToAnimal(code: String, animalId: Long): Result<Unit> {
         return try {
             database.withTransaction {
-                val animal = animalDao.getById(animalId)
-                    ?: return@withTransaction Result.failure<Unit>(DomainError.AnimalNotFound)
+                val animal = animalDao.getById(animalId) ?: throw DomainError.AnimalNotFound
 
                 if (animal.expiredAt != null) {
-                    return@withTransaction Result.failure<Unit>(DomainError.AnimalExpired)
+                    throw DomainError.AnimalExpired
                 }
 
                 val now = System.currentTimeMillis()
@@ -35,11 +34,18 @@ class RfidTagRepositoryImpl @Inject constructor(
                 val activeByCode = rfidTagDao.getActiveByCode(code)
                 val activeByAnimal = rfidTagDao.getActiveByAnimal(animalId)
 
+                // از قبل دقیقاً رو همین دام فعاله - کاری لازم نیست
                 if (activeByCode != null && activeByCode.animalId == animalId) {
-                    return@withTransaction Result.success(Unit)
+                    return@withTransaction
                 }
 
+                // این تگ الان رو یه دام دیگه فعاله - فقط وقتی مجازه که اون دام منقضی شده باشه
                 if (activeByCode != null) {
+                    val ownerAnimal = activeByCode.animalId?.let { animalDao.getById(it) }
+                    val ownerIsExpired = ownerAnimal?.expiredAt != null
+                    if (!ownerIsExpired) {
+                        throw DomainError.RfidCodeActiveOnAnotherAnimal
+                    }
                     rfidTagDao.deactivate(id = activeByCode.id, unassignedAt = now)
                 }
 
@@ -55,9 +61,10 @@ class RfidTagRepositoryImpl @Inject constructor(
                         assignedAt = now
                     )
                 )
-
-                Result.success(Unit)
             }
+            Result.success(Unit)
+        } catch (e: DomainError) {
+            Result.failure(e)
         } catch (e: Exception) {
             Result.failure(DomainError.RfidAssignmentFailed(e))
         }

@@ -20,6 +20,7 @@ coroutines = "1.10.2"
 kotlinxSerializationJson = "1.7.3"
 composeMaterialIcons = "1.7.6"
 lifecycleRuntimeCompose = "2.8.7"
+roomKtx = "2.8.5"
 
 
 [libraries]
@@ -52,6 +53,7 @@ kotlinx-coroutines-test = {group = "org.jetbrains.kotlinx", name = "kotlinx-coro
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 androidx-compose-material-icons-core = { group = "androidx.compose.material", name = "material-icons-core", version.ref = "composeMaterialIcons" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

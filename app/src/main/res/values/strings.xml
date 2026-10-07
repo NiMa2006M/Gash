@@ -67,6 +67,8 @@
     <string name="error_animal_not_found">Animal not found</string>
     <string name="error_animal_expired">This animal is marked as expired and cannot receive a new tag</string>
     <string name="error_invalid_weight">Weight must be a positive number</string>
+    <string name="error_rfid_code_active_on_another_animal">This RFID tag is currently active on another living animal. That animal must be expired first.</string>
+
 
     <!-- HOME -->
     <string name="operation_milking">Milking</string>

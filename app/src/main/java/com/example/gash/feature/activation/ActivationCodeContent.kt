@@ -1,5 +1,6 @@
 package com.example.gash.feature.activation
 
+import android.R.attr.maxHeight
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -65,12 +67,19 @@ fun ActivationCodeContent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
+
+            val configuration = LocalConfiguration.current
+            val screenHeight = configuration.screenHeightDp.dp
+
+            val imageHeight = (screenHeight * 0.25f)
+                .coerceIn(140.dp, 220.dp)
+
             Image(
                 painter = painterResource(illustrationRes),
                 contentDescription = "gash_activation_lamb",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp),
+                    .height(imageHeight),
                 contentScale = ContentScale.Fit
             )
 
@@ -97,7 +106,7 @@ fun ActivationCodeContent(
                         uiState.phoneNumber
                     ),
                     color = GashTextSecondary,
-                    fontSize = 12.sp,
+                    fontSize = 10.sp,
                 )
                 Spacer(Modifier.weight(1f))
                 TextButton(

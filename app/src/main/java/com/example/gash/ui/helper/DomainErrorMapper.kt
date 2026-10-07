@@ -12,6 +12,7 @@ fun DomainError.toUiText(): UiText = when (this) {
     is DomainError.AnimalExpired -> UiText.StringResource(R.string.error_animal_expired)
     is DomainError.Unknown -> UiText.StringResource(R.string.common_error_unknown)
     is DomainError.InvalidWeight -> UiText.StringResource(R.string.error_invalid_weight)
+    is DomainError.RfidCodeActiveOnAnotherAnimal -> UiText.StringResource(R.string.error_rfid_code_active_on_another_animal)
 }
 
 fun Throwable.toUiText(): UiText =

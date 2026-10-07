@@ -62,12 +62,13 @@
     <string name="activation_success">فعال‌سازی موفق! صفحه‌ی Home بعداً اینجا میاد</string>
 
     <!-- ERROR -->
-    <string name="error_empty_rfid_code">کد RFID نمی‌تواند خالی باشد</string>
+    <string name="error_empty_rfid_code">کد آر‌اف‌آي‌دی نمی‌تواند خالی باشد</string>
     <string name="error_empty_herd_name">نام گله نمی‌تواند خالی باشد</string>
-    <string name="error_rfid_assignment_failed">اتصال تگ RFID ناموفق بود. دوباره تلاش کنید.</string>
+    <string name="error_rfid_assignment_failed">اتصال تگ ناموفق بود. دوباره تلاش کنید.</string>
     <string name="error_animal_not_found">دام مورد نظر پیدا نشد</string>
     <string name="error_animal_expired">این دام منقضی‌شده است و نمی‌تواند تگ جدید بگیرد</string>
     <string name="error_invalid_weight">وزن باید عددی مثبت باشد</string>
+    <string name="error_rfid_code_active_on_another_animal">این تگ الان روی یک دام فعال دیگه‌ست. اول باید اون دام منقضی بشه.</string>
 
     <!-- HOME -->
     <string name="operation_milking">شیردوشی</string>

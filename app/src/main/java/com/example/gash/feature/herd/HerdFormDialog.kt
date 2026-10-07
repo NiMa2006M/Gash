@@ -8,6 +8,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.example.gash.R
 import com.example.gash.ui.helper.UiText
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun HerdFormDialog(
@@ -25,22 +34,83 @@ fun HerdFormDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(stringResource(titleRes)) },
+
+        title = {
+            Text(
+                text = stringResource(titleRes),
+                style = MaterialTheme.typography.titleLarge
+            )
+        },
+
         text = {
             OutlinedTextField(
                 value = text,
                 onValueChange = onTextChange,
-                placeholder = { Text(stringResource(R.string.herd_name_hint)) },
+
+                modifier = Modifier
+                    .fillMaxWidth(),
+
+                singleLine = true,
+
+                shape = RoundedCornerShape(16.dp),
+
+                placeholder = {
+                    Text(
+                        text = stringResource(R.string.herd_name_hint),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
+                            alpha = 0.45f
+                        )
+                    )
+                },
+
                 isError = error != null,
-                supportingText = error?.let { { Text(it.asString()) } },
-                singleLine = true
+
+                supportingText = error?.let {
+                    {
+                        Text(
+                            text = it.asString()
+                        )
+                    }
+                },
+
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedContainerColor =
+                        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f),
+
+                    focusedContainerColor =
+                        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
+
+                    unfocusedBorderColor =
+                        MaterialTheme.colorScheme.outlineVariant,
+
+                    focusedBorderColor =
+                        MaterialTheme.colorScheme.primary,
+
+                    unfocusedPlaceholderColor =
+                        MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.45f),
+
+                    focusedPlaceholderColor =
+                        MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.35f),
+
+                    errorBorderColor =
+                        MaterialTheme.colorScheme.error
+                )
             )
         },
+
         confirmButton = {
-            TextButton(onClick = onConfirm) { Text(stringResource(R.string.common_btn_confirm)) }
+            Button(
+                onClick = onConfirm,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
+            ) {
+                Text(stringResource(R.string.common_btn_confirm))
+            }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_btn_cancel)) }
+            OutlinedButton(onClick = onDismiss) { Text(stringResource(R.string.common_btn_cancel)) }
         }
     )
 }
