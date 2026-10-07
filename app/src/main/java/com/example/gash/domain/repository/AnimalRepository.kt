@@ -9,6 +9,7 @@ interface AnimalRepository {
     fun observeUnassignedAnimals(): Flow<List<Animal>>
     fun observeExpiredAnimals(): Flow<List<Animal>>
     fun observeTotalCount(): Flow<Int>
+    fun observeAnimal(animalId: Long): Flow<Animal?>
     suspend fun getAnimal(id: Long): Animal?
     suspend fun registerAnimal(herdId: Long?): Long
     suspend fun moveToHerd(animalId: Long, herdId: Long?)

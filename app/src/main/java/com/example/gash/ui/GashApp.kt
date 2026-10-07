@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gash.core.navigation.GashRoute
 import com.example.gash.feature.activation.activationScreen
+import com.example.gash.feature.animal.animalDetailScreen
 import com.example.gash.feature.herd.herdDetailScreen
 import com.example.gash.feature.welcome.welcomeScreen
 
@@ -53,7 +54,11 @@ fun GashApp(viewModel: GashAppViewModel = hiltViewModel()) {
 
         herdDetailScreen(
             onBack = { navController.popBackStack() },
-            onAnimalClick = { /* TODO */ }
+            onAnimalClick = { animalId -> navController.navigate(GashRoute.AnimalDetail(animalId)) }
+        )
+
+        animalDetailScreen(
+            onBack = { navController.popBackStack() }
         )
     }
 }

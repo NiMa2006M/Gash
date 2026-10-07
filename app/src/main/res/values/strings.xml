@@ -126,6 +126,25 @@
     <string name="herd_detail_search_hint">Search by animal ID, RFID, or tag</string>
     <string name="herd_detail_no_search_results">No animals matched your search</string>
 
+    <string name="animal_detail_status_active">Active</string>
+    <string name="animal_detail_status_expired">Expired</string>
+    <string name="animal_detail_no_herd">No herd</string>
+    <string name="animal_detail_herd_label">Herd</string>
+    <string name="animal_detail_status_label">Status</string>
+    <string name="animal_detail_latest_weight">Latest weight (kg)</string>
+    <string name="animal_detail_weight_history_title">Weight Trend</string>
+    <string name="animal_detail_record_weight_button">Record weight</string>
+    <string name="animal_detail_record_weight_title">Record New Weight</string>
+    <string name="animal_detail_weight_kg_hint">Weight (kg)</string>
+    <string name="animal_detail_weight_chart_not_enough_data">At least 2 weight records are needed to show a chart</string>
+    <string name="animal_detail_move_herd_button">Move Herd</string>
+    <string name="animal_detail_move_herd_title">Move to Another Herd</string>
+    <string name="animal_detail_current_herd">Current herd</string>
+    <string name="animal_detail_expire_button">Mark as Expired</string>
+    <string name="animal_detail_expire_confirm_title">Mark Animal as Expired</string>
+    <string name="animal_detail_expire_confirm_message">This animal will be marked expired and removed from active lists. Its active RFID tag will also be freed.</string>
+    <string name="animal_detail_restore_button">Restore</string>
+
     <string name="account_placeholder">Account screen coming soon</string>
     <string name="file_transfer_placeholder">File transfer screen coming soon</string>
 

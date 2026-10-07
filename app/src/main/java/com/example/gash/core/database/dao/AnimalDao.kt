@@ -22,6 +22,16 @@ interface AnimalDao {
 
     @Query(
         """
+    SELECT animals.*, rfid_tags.code AS activeRfidCode
+    FROM animals
+    LEFT JOIN rfid_tags ON rfid_tags.animalId = animals.id AND rfid_tags.isActive = 1
+    WHERE animals.id = :animalId
+    """
+    )
+    fun observeByIdWithRfid(animalId: Long): Flow<AnimalListRow?>
+
+    @Query(
+        """
         SELECT animals.*, rfid_tags.code AS activeRfidCode
         FROM animals
         LEFT JOIN rfid_tags ON rfid_tags.animalId = animals.id AND rfid_tags.isActive = 1

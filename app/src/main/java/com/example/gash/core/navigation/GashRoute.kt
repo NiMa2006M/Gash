@@ -26,9 +26,8 @@ sealed interface GashRoute {
     @Serializable
     data class HerdDetail(val herdId: Long) : GashRoute
 
-    // Demo Animal detail
-    // @Serializable
-    // data class AnimalDetail(val animalId: Long) : GashRoute
+    @Serializable
+    data class AnimalDetail(val animalId: Long) : GashRoute
 
 }
 

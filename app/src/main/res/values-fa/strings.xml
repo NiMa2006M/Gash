@@ -126,6 +126,25 @@
     <string name="herd_detail_search_hint">جستجو بر اساس شماره دام، RFID یا تگ</string>
     <string name="herd_detail_no_search_results">هیچ دامی با این مشخصات پیدا نشد</string>
 
+    <string name="animal_detail_status_active">فعال</string>
+    <string name="animal_detail_status_expired">منقضی</string>
+    <string name="animal_detail_no_herd">بدون گله</string>
+    <string name="animal_detail_herd_label">گله</string>
+    <string name="animal_detail_status_label">وضعیت</string>
+    <string name="animal_detail_latest_weight">آخرین وزن (کیلوگرم)</string>
+    <string name="animal_detail_weight_history_title">روند وزن</string>
+    <string name="animal_detail_record_weight_button">ثبت وزن</string>
+    <string name="animal_detail_record_weight_title">ثبت وزن جدید</string>
+    <string name="animal_detail_weight_kg_hint">وزن (کیلوگرم)</string>
+    <string name="animal_detail_weight_chart_not_enough_data">برای نمایش نمودار حداقل ۲ تا رکورد وزن لازمه</string>
+    <string name="animal_detail_move_herd_button">جابه‌جایی گله</string>
+    <string name="animal_detail_move_herd_title">انتقال به گله‌ی دیگر</string>
+    <string name="animal_detail_current_herd">گله‌ی فعلی</string>
+    <string name="animal_detail_expire_button">منقضی کردن دام</string>
+    <string name="animal_detail_expire_confirm_title">منقضی کردن دام</string>
+    <string name="animal_detail_expire_confirm_message">این دام منقضی علامت‌گذاری می‌شه و از لیست‌های فعال خارج می‌شه. تگ RFID فعالش هم آزاد می‌شه.</string>
+    <string name="animal_detail_restore_button">فعال‌سازی مجدد</string>
+
     <string name="account_placeholder">صفحه‌ی حساب کاربری به‌زودی اینجا میاد</string>
     <string name="file_transfer_placeholder">صفحه‌ی ارسال فایل به‌زودی اینجا میاد</string>
 

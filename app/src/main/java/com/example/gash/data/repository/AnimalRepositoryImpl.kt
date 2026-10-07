@@ -31,6 +31,11 @@ class AnimalRepositoryImpl @Inject constructor(
 
     override fun observeTotalCount(): Flow<Int> = animalDao.observeTotalCount()
 
+    override fun observeAnimal(animalId: Long): Flow<Animal?> =
+        animalDao.observeByIdWithRfid(animalId).map { row ->
+            row?.animal?.toDomain(activeRfidCode = row.activeRfidCode)
+        }
+
     override suspend fun getAnimal(id: Long): Animal? {
         val entity = animalDao.getById(id) ?: return null
         val activeTag = rfidTagDao.getActiveByAnimal(id)
