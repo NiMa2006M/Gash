@@ -150,4 +150,13 @@ class HerdDetailViewModel @Inject constructor(
             }
         }
     }
+
+    fun onRemoveAnimalFromHerd(animalId: Long) {
+        viewModelScope.launch {
+            moveAnimalToHerdUseCase(
+                animalId = animalId,
+                newHerdId = null
+            )
+        }
+    }
 }

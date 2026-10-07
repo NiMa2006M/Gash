@@ -1,6 +1,7 @@
 package com.example.gash.feature.herd
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,16 +21,21 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -53,17 +59,50 @@ fun HerdDetailScreen(
     onRegisterNewSelected: () -> Unit,
     onToggleUnassignedSelection: (Long) -> Unit,
     onConfirmAddExisting: () -> Unit,
+    onRemoveAnimalFromHerd: (Long) -> Unit,
     onConfirmRegisterNew: (String?) -> Unit
+
 ) {
+    var flippedAnimalId by rememberSaveable {
+        mutableStateOf<Long?>(null)
+    }
+    var ignoreNextPointerUp by remember {
+        mutableStateOf(false)
+    }
+
     Scaffold(
+        modifier = Modifier.pointerInput(flippedAnimalId) {
+            awaitPointerEventScope {
+                while (true) {
+                    awaitFirstDown(
+                        requireUnconsumed = false,
+                        pass = PointerEventPass.Final
+                    )
+
+                    val up = waitForUpOrCancellation(
+                        pass = PointerEventPass.Final
+                    )
+
+                    if (up != null && !ignoreNextPointerUp) {
+                        flippedAnimalId = null
+                    }
+
+                    ignoreNextPointerUp = false
+                }
+            }
+        },
         containerColor = GashSurface,
         floatingActionButton = {
             FloatingActionButton(
-                onClick = onAddClick,
+                onClick = {
+                    flippedAnimalId = null
+                    onAddClick()
+                },
                 modifier = Modifier.navigationBarsPadding(),
                 containerColor = GashGreen,
                 contentColor = GashSurface,
                 shape = RoundedCornerShape(18.dp)
+
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -144,7 +183,13 @@ fun HerdDetailScreen(
             }
 
             if (uiState.animals.isNotEmpty()) {
-                HerdSearchField(query = uiState.searchQuery, onQueryChange = onSearchQueryChange)
+                HerdSearchField(
+                    query = uiState.searchQuery,
+                    onQueryChange = {
+                        flippedAnimalId = null
+                        onSearchQueryChange(it)
+                    }
+                )
                 Spacer(Modifier.height(8.dp))
             }
 
@@ -209,8 +254,35 @@ fun HerdDetailScreen(
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
                 ) {
-                    this.items(items = uiState.filteredAnimals, key = { it.id }) { animal ->
-                        AnimalCard(animal = animal, onClick = { onAnimalClick(animal.id) })
+
+                    items(
+                        items = uiState.filteredAnimals,
+                        key = { it.id }
+                    ) { animal ->
+
+                        AnimalCard(
+                            animal = animal,
+
+                            isFlipped = flippedAnimalId == animal.id,
+
+                            onClick = {
+                                onAnimalClick(animal.id)
+                            },
+
+                            onLongClick = {
+                                ignoreNextPointerUp = true
+                                flippedAnimalId = animal.id
+                            },
+
+                            onFlipBack = {
+                                flippedAnimalId = null
+                            },
+
+                            onRemoveFromHerd = {
+                                flippedAnimalId = null
+                                onRemoveAnimalFromHerd(animal.id)
+                            }
+                        )
                     }
                 }
             }

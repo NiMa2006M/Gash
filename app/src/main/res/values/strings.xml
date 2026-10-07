@@ -125,6 +125,7 @@
     <string name="herd_detail_empty_animals">This herd has no animals yet</string>
     <string name="herd_detail_search_hint">Search by animal ID, RFID, or tag</string>
     <string name="herd_detail_no_search_results">No animals matched your search</string>
+    <string name="herd_detail_culling_from_herd">Culling from the herd</string>
 
     <string name="animal_detail_status_active">Active</string>
     <string name="animal_detail_status_expired">Expired</string>

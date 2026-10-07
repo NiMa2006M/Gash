@@ -25,6 +25,7 @@ val GashBackground_FUNGREEN = Color(0xFF327236)
 
 // Feedback
 val GashError_RED = Color(0xFFBA1A1A)
+val GashDanger_RED = Color(0xFFD32F2F)
 
 // UI
 val GashBorder = Color(0xFFE1E6F0)

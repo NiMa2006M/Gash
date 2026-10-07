@@ -125,6 +125,7 @@
     <string name="herd_detail_empty_animals">این گله هنوز دامی نداره</string>
     <string name="herd_detail_search_hint">جستجو بر اساس شماره دام، RFID یا تگ</string>
     <string name="herd_detail_no_search_results">هیچ دامی با این مشخصات پیدا نشد</string>
+    <string name="herd_detail_culling_from_herd">حذف از گله</string>
 
     <string name="animal_detail_status_active">فعال</string>
     <string name="animal_detail_status_expired">منقضی</string>

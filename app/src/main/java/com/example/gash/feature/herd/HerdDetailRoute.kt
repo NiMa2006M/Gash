@@ -24,6 +24,7 @@ fun HerdDetailRoute(
         onRegisterNewSelected = viewModel::onRegisterNewSelected,
         onToggleUnassignedSelection = viewModel::onToggleUnassignedSelection,
         onConfirmAddExisting = viewModel::onConfirmAddExisting,
+        onRemoveAnimalFromHerd = viewModel::onRemoveAnimalFromHerd,
         onConfirmRegisterNew = viewModel::onConfirmRegisterNew
     )
 }
