@@ -34,7 +34,12 @@ import com.example.gash.feature.home.homeScreen
 import com.example.gash.ui.theme.GashOrange
 
 @Composable
-fun MainScaffold(onNavigateToHerdDetail: (Long) -> Unit) {
+fun MainScaffold(
+    onNavigateToHerdDetail: (Long) -> Unit,
+    onNavigateToGeneralInfo: () -> Unit,
+    onNavigateToSettings: () -> Unit,
+    onNavigateToAbout: () -> Unit
+) {
     val navController = rememberNavController()
     Scaffold(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
@@ -46,7 +51,11 @@ fun MainScaffold(onNavigateToHerdDetail: (Long) -> Unit) {
             modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding())
         ) {
             homeScreen(onNavigateToHerdDetail = onNavigateToHerdDetail)
-            accountScreen()
+            accountScreen(
+                onNavigateToGeneralInfo = onNavigateToGeneralInfo,
+                onNavigateToSettings = onNavigateToSettings,
+                onNavigateToAbout = onNavigateToAbout
+            )
             fileTransferScreen()
         }
     }

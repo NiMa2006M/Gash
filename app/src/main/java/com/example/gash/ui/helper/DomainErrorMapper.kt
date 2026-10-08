@@ -13,6 +13,7 @@ fun DomainError.toUiText(): UiText = when (this) {
     is DomainError.Unknown -> UiText.StringResource(R.string.common_error_unknown)
     is DomainError.InvalidWeight -> UiText.StringResource(R.string.error_invalid_weight)
     is DomainError.RfidCodeActiveOnAnotherAnimal -> UiText.StringResource(R.string.error_rfid_code_active_on_another_animal)
+    is DomainError.EmptyFarmName -> UiText.StringResource(R.string.error_empty_farm_name)
 }
 
 fun Throwable.toUiText(): UiText =

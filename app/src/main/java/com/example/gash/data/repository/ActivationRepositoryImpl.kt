@@ -10,6 +10,8 @@ class ActivationRepositoryImpl @Inject constructor(
 ) : ActivationRepository {
     override val isActivated: Flow<Boolean> = prefs.isActivated
     override val farmName: Flow<String?> = prefs.farmName
+    override val farmId: Flow<String?> = prefs.farmId
+    override val phoneNumber: Flow<String?> = prefs.phoneNumber
 
     override suspend fun saveActivation(farmName: String, farmId: String, phoneNumber: String) =
         prefs.saveActivation(farmName, farmId, phoneNumber)

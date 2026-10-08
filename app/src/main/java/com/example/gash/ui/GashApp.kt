@@ -12,6 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gash.core.navigation.GashRoute
+import com.example.gash.feature.account.accountAboutScreen
+import com.example.gash.feature.account.accountGeneralInfoScreen
+import com.example.gash.feature.account.accountSettingsScreen
 import com.example.gash.feature.activation.activationScreen
 import com.example.gash.feature.animal.animalDetailScreen
 import com.example.gash.feature.herd.herdDetailScreen
@@ -27,7 +30,7 @@ fun GashApp(viewModel: GashAppViewModel = hiltViewModel()) {
         if (welcomeFinished && isActivated != null) {
             val destination = if (isActivated == true) GashRoute.Main else GashRoute.Activation
             navController.navigate(destination) {
-                popUpTo(GashRoute.Welcome) { inclusive = true }
+                popUpTo(0) { inclusive = true }
             }
         }
     }
@@ -48,7 +51,10 @@ fun GashApp(viewModel: GashAppViewModel = hiltViewModel()) {
 
         composable<GashRoute.Main> {
             MainScaffold(
-                onNavigateToHerdDetail = { herdId -> navController.navigate(GashRoute.HerdDetail(herdId)) }
+                onNavigateToHerdDetail = { herdId -> navController.navigate(GashRoute.HerdDetail(herdId)) },
+                onNavigateToGeneralInfo = { navController.navigate(GashRoute.AccountGeneralInfo) },
+                onNavigateToSettings = { navController.navigate(GashRoute.AccountSettings) },
+                onNavigateToAbout = { navController.navigate(GashRoute.AccountAbout) }
             )
         }
 
@@ -57,8 +63,10 @@ fun GashApp(viewModel: GashAppViewModel = hiltViewModel()) {
             onAnimalClick = { animalId -> navController.navigate(GashRoute.AnimalDetail(animalId)) }
         )
 
-        animalDetailScreen(
-            onBack = { navController.popBackStack() }
-        )
+        animalDetailScreen(onBack = { navController.popBackStack() })
+
+        accountGeneralInfoScreen(onBack = { navController.popBackStack() })
+        accountSettingsScreen(onBack = { navController.popBackStack() })
+        accountAboutScreen(onBack = { navController.popBackStack() })
     }
 }

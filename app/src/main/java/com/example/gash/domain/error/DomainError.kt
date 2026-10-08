@@ -11,6 +11,7 @@ sealed class DomainError(cause: Throwable? = null) : Exception(cause) {
     data object RfidCodeActiveOnAnotherAnimal : DomainError()
     data object EmptyHerdName : DomainError()
     data object InvalidWeight : DomainError()
+    data object EmptyFarmName : DomainError()
 
     class Unknown(cause: Throwable? = null) : DomainError(cause)
 }
