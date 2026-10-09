@@ -8,7 +8,9 @@ enum class AppLanguage(val tag: String, val labelRes: Int) {
     ENGLISH("en", R.string.settings_language_en);
 
     companion object {
-        fun fromTag(tag: String): AppLanguage =
-            entries.firstOrNull { it.tag == tag } ?: SYSTEM
+        fun fromTag(tag: String): AppLanguage {
+            val language = tag.substringBefore(',').substringBefore('-')
+            return entries.firstOrNull { it.tag.isNotEmpty() && it.tag == language } ?: SYSTEM
+        }
     }
 }

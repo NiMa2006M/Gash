@@ -55,7 +55,7 @@ fun HerdFormDialog(
 
                 placeholder = {
                     Text(
-                        text = stringResource(R.string.herd_name_hint),
+                        text = stringResource(R.string.herd_management_name_hint),
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
                             alpha = 0.45f
                         )

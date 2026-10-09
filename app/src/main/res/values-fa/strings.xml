@@ -19,7 +19,7 @@
     <string name="common_btn_login">ورود</string>
     <string name="common_btn_more">بیشتر</string>
     <string name="common_btn_clear">پاک کردن</string>
-
+    <string name="common_btn_add">افزودن</string>
 
     <!-- SETTING -->
     <string name="settings_language_system">زبان پیش‌فرض دستگاه</string>
@@ -59,7 +59,6 @@
     <string name="activation_code_resendCode">دریافت مجدد کد تایید</string>
     <string name="activation_code_codeRemainingTime">کد تا %1$02d:%2$02d دیگر برای شما ارسال خواهد شد</string>
 
-    <string name="activation_success">فعال‌سازی موفق! صفحه‌ی Home بعداً اینجا میاد</string>
 
     <!-- ERROR -->
     <string name="error_empty_rfid_code">کد آر‌اف‌آي‌دی نمی‌تواند خالی باشد</string>
@@ -69,6 +68,8 @@
     <string name="error_animal_expired">این دام منقضی‌شده است و نمی‌تواند تگ جدید بگیرد</string>
     <string name="error_invalid_weight">وزن باید عددی مثبت باشد</string>
     <string name="error_rfid_code_active_on_another_animal">این تگ الان روی یک دام فعال دیگه‌ست. اول باید اون دام منقضی بشه.</string>
+    <string name="error_empty_farm_name">نام دامداری نمی‌تواند خالی باشد</string>
+    <string name="error_profile_image_failed">ثبت عکس پروفایل ناموفق بود. عکس دیگری را امتحان کنید.</string>
 
     <!-- HOME -->
     <string name="operation_milking">شیردوشی</string>
@@ -89,6 +90,7 @@
     <string name="home_total_animals_label">تعداد کل گوسفندان</string>
     <string name="home_total_animals_count">%1$d راس</string>
 
+    <!-- NAVIGATION BOTTOM -->
     <string name="bottom_nav_file_transfer">ارسال فایل</string>
     <string name="bottom_nav_account">حساب کاربری</string>
     <string name="bottom_nav_operations">عملیات ها</string>
@@ -98,10 +100,9 @@
     <string name="herd_management_animal_count">%1$d راس</string>
     <string name="herd_management_empty_title">هنوز هیچ گله‌ای ثبت نشده</string>
     <string name="herd_management_empty_description">اولین گله‌ی دامداری خود را ایجاد کنید</string>
-    <string name="common_btn_add">افزودن</string>
     <string name="herd_management_add_dialog_title">افزودن گله جدید</string>
     <string name="herd_management_rename_dialog_title">ویرایش نام گله</string>
-    <string name="herd_name_hint">نام گله</string>
+    <string name="herd_management_name_hint">نام گله</string>
     <string name="herd_management_delete_dialog_title">حذف گله</string>
     <string name="herd_management_delete_dialog_message">گله‌ی «%1$s» حذف بشه؟ دام‌های این گله پاک نمی‌شن، فقط بی‌گله می‌مونن.</string>
     <string name="herd_menu_rename">ویرایش نام</string>
@@ -123,10 +124,11 @@
     <string name="herd_detail_register_new_title">ثبت دام جدید</string>
     <string name="herd_detail_rfid_optional_hint">کد RFID (اختیاری)</string>
     <string name="herd_detail_empty_animals">این گله هنوز دامی نداره</string>
-    <string name="herd_detail_search_hint">جستجو بر اساس شماره دام، RFID یا تگ</string>
+    <string name="herd_detail_search_hint">جستجو بر اساس شماره دام، (RFID) یا تگ</string>
     <string name="herd_detail_no_search_results">هیچ دامی با این مشخصات پیدا نشد</string>
     <string name="herd_detail_culling_from_herd">حذف از گله</string>
 
+    <!-- ANIMAL DETAIL -->
     <string name="animal_detail_status_active">فعال</string>
     <string name="animal_detail_status_expired">منقضی</string>
     <string name="animal_detail_no_herd">بدون گله</string>
@@ -143,9 +145,10 @@
     <string name="animal_detail_current_herd">گله‌ی فعلی</string>
     <string name="animal_detail_expire_button">منقضی کردن دام</string>
     <string name="animal_detail_expire_confirm_title">منقضی کردن دام</string>
-    <string name="animal_detail_expire_confirm_message">این دام منقضی علامت‌گذاری می‌شه و از لیست‌های فعال خارج می‌شه. تگ RFID فعالش هم آزاد می‌شه.</string>
+    <string name="animal_detail_expire_confirm_message">این دام منقضی علامت‌گذاری می‌شه و از لیست‌های فعال خارج می‌شه. تگ فعالش هم آزاد می‌شه.</string>
     <string name="animal_detail_restore_button">فعال‌سازی مجدد</string>
 
+    <!-- ACCOUNT -->
     <string name="account_logout">خروج از حساب</string>
     <string name="account_general_info">اطلاعات عمومی</string>
     <string name="account_general_info_dec">نام دامداری، شناسه و شماره تماس</string>
@@ -154,7 +157,8 @@
     <string name="account_about">درباره‌ی گاش</string>
     <string name="account_about_dec">اطلاعات برنامه و نسخه</string>
     <string name="general_info_saved">با موفقیت ذخیره شد</string>
-    <string name="error_empty_farm_name">نام دامداری نمی‌تواند خالی باشد</string>
+    <string name="general_info_change_photo">تغییر عکس</string>
+    <string name="general_info_remove_photo">حذف عکس</string>
     <string name="settings_language_section">زبان اپ</string>
     <string name="settings_tags_section">تگ‌های اضافی دام</string>
     <string name="settings_tag1">تگ شماره ۱</string>
@@ -162,15 +166,12 @@
     <string name="settings_tag3">تگ شماره ۳</string>
     <string name="about_version">نسخه %1$s</string>
 
-    <string name="general_info_change_photo">تغییر عکس</string>
-    <string name="general_info_remove_photo">حذف عکس</string>
-    <string name="error_profile_image_failed">ثبت عکس پروفایل ناموفق بود. عکس دیگری را امتحان کنید.</string>
-
     <string name="about_copyright">تمامی حقوق این اپلیکیشن محفوظ است</string>
 
+    <!-- DEMO -->
+    <string name="activation_success">فعال‌سازی موفق! صفحه‌ی Home بعداً اینجا میاد</string>
     <string name="account_placeholder">صفحه‌ی حساب کاربری به‌زودی اینجا میاد</string>
     <string name="file_transfer_placeholder">صفحه‌ی ارسال فایل به‌زودی اینجا میاد</string>
-
     <string name="herd_management_placeholder">صفحه‌ی مدیریت گله به‌زودی اینجا میاد</string>
     <string name="weight_placeholder">صفحه‌ی وزن‌کشی به‌زودی اینجا میاد</string>
 
