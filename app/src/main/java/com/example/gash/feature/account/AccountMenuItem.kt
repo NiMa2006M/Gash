@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,6 +30,7 @@ import com.example.gash.ui.theme.GashTextSecondary
 @Composable
 fun AccountMenuItem(
     icon: ImageVector,
+    painter: Painter?,
     title: String,
     subtitle: String,
     onClick: () -> Unit
@@ -53,12 +55,22 @@ fun AccountMenuItem(
                 ),
             contentAlignment = Alignment.Center
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = GashGreen,
-                modifier = Modifier.size(22.dp)
-            )
+            if (painter == null){
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = GashGreen,
+                    modifier = Modifier.size(22.dp)
+                )
+            } else {
+                Icon(
+                    painter = painter,
+                    contentDescription = null,
+                    tint = GashGreen,
+                    modifier = Modifier.size(22.dp)
+                )
+            }
+
         }
 
         Spacer(

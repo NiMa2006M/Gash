@@ -27,16 +27,16 @@ class ProfileImageStorage @Inject constructor(
         val resolver = context.contentResolver
 
         val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-        resolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, bounds) }
-            ?: throw IOException("Cannot open image")
+        val boundsStream = resolver.openInputStream(uri) ?: throw IOException("Cannot open image")
+        boundsStream.use { BitmapFactory.decodeStream(it, null, bounds) }
         if (bounds.outWidth <= 0 || bounds.outHeight <= 0) throw IOException("Invalid image")
 
         val decodeOptions = BitmapFactory.Options().apply {
             inSampleSize = calculateSampleSize(bounds.outWidth, bounds.outHeight)
         }
-        val decoded = resolver.openInputStream(uri)?.use {
-            BitmapFactory.decodeStream(it, null, decodeOptions)
-        } ?: throw IOException("Cannot decode image")
+        val decodeStream = resolver.openInputStream(uri) ?: throw IOException("Cannot open image")
+        val decoded = decodeStream.use { BitmapFactory.decodeStream(it, null, decodeOptions) }
+            ?: throw IOException("Cannot decode image")
 
         val rotation = resolver.openInputStream(uri)?.use { readRotationDegrees(it) } ?: 0
         val upright = if (rotation != 0) {

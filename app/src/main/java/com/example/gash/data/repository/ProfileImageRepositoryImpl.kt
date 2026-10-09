@@ -1,5 +1,7 @@
 package com.example.gash.data.repository
 
+import android.util.Log
+import com.example.gash.BuildConfig
 import com.example.gash.core.datastore.ActivationPreferences
 import com.example.gash.core.storage.ProfileImageStorage
 import com.example.gash.domain.error.DomainError
@@ -23,6 +25,9 @@ class ProfileImageRepositoryImpl @Inject constructor(
             prefs.setProfileImagePath(newPath)
             oldPath?.let(storage::delete)
             Result.success(Unit)
+        } catch (e: Exception) {
+            if (BuildConfig.DEBUG) Log.w("ProfileImage", "setProfileImage failed", e)
+            Result.failure(DomainError.ProfileImageFailed(e))
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {

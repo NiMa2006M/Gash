@@ -19,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -72,6 +73,7 @@ fun AccountScreen(
                     AccountSectionCard {
                         AccountMenuItem(
                             icon = Icons.Default.Person,
+                            painter = painterResource(R.drawable.icon_general_info),
                             title = stringResource(R.string.account_general_info),
                             subtitle = stringResource(R.string.account_general_info_dec),
                             onClick = onNavigateToGeneralInfo
@@ -93,6 +95,7 @@ fun AccountScreen(
                     AccountSectionCard {
                         AccountMenuItem(
                             icon = Icons.Default.Settings,
+                            painter = painterResource(R.drawable.icon_setting),
                             title = stringResource(R.string.account_settings),
                             subtitle = stringResource(R.string.account_settings_dec),
                             onClick = onNavigateToSettings
@@ -114,6 +117,7 @@ fun AccountScreen(
                     AccountSectionCard {
                         AccountMenuItem(
                             icon = Icons.Default.Info,
+                            painter = null,
                             title = stringResource(R.string.account_about),
                             subtitle = stringResource(R.string.account_about_dec),
                             onClick = onNavigateToAbout
