@@ -1,12 +1,14 @@
 package com.example.gash.feature.herd
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -33,29 +35,70 @@ fun PickExistingAnimalsSheet(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    ModalBottomSheet(onDismissRequest = onDismiss) {
-        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)) {
-            Text(text = stringResource(R.string.herd_detail_pick_existing_title))
+    ModalBottomSheet(
+        onDismissRequest = onDismiss
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(380.dp)
+                .padding(horizontal = 20.dp)
+        ) {
+            Text(
+                text = stringResource(
+                    R.string.herd_detail_pick_existing_title
+                )
+            )
+
+            Spacer(
+                modifier = Modifier.height(8.dp)
+            )
 
             if (animals.isEmpty()) {
-                Box(modifier = Modifier.fillMaxWidth().height(80.dp), contentAlignment = Alignment.Center) {
-                    Text(text = stringResource(R.string.herd_detail_no_unassigned_animals))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = stringResource(
+                            R.string.herd_detail_no_unassigned_animals
+                        )
+                    )
                 }
             } else {
                 LazyColumn(
-                    modifier = Modifier.height(320.dp),
-                    contentPadding = PaddingValues(vertical = 8.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    contentPadding = PaddingValues(
+                        vertical = 4.dp
+                    )
                 ) {
-                    items(items = animals, key = { it.id }) { animal ->
+                    items(
+                        items = animals,
+                        key = { it.id }
+                    ) { animal ->
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Checkbox(
                                 checked = animal.id in selectedIds,
-                                onCheckedChange = { onToggle(animal.id) }
+                                onCheckedChange = {
+                                    onToggle(animal.id)
+                                }
                             )
-                            Text(text = stringResource(R.string.animal_list_item_title, animal.id))
+
+                            Text(
+                                text = stringResource(
+                                    R.string.animal_list_item_title,
+                                    animal.id
+                                )
+                            )
                         }
                     }
                 }
@@ -64,9 +107,18 @@ fun PickExistingAnimalsSheet(
             Button(
                 onClick = onConfirm,
                 enabled = selectedIds.isNotEmpty() && !isSubmitting,
-                modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = 8.dp,
+                        bottom = 12.dp
+                    )
             ) {
-                Text(text = stringResource(R.string.common_btn_add))
+                Text(
+                    text = stringResource(
+                        R.string.common_btn_add
+                    )
+                )
             }
         }
     }

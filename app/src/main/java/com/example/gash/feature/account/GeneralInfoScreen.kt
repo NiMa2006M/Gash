@@ -1,24 +1,25 @@
 package com.example.gash.feature.account
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -58,6 +59,14 @@ fun GeneralInfoScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    val photoPicker = rememberLauncherForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        uri?.let { viewModel.onProfileImagePicked(it.toString()) }
+    }
+
+    val requiredText = stringResource(R.string.common_error_required_field)
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -87,106 +96,133 @@ fun GeneralInfoScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 20.dp, vertical = 16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+                .imePadding()
+                .padding(horizontal = 20.dp, vertical = 16.dp)
         ) {
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
+                ProfilePhotoSection(
+                    imagePath = uiState.profileImagePath,
+                    isProcessing = uiState.isImageProcessing,
+                    onChangeClick = {
+                        photoPicker.launch(
+                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                        )
+                    },
+                    onRemoveClick = viewModel::onRemoveProfileImage
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    )
                 ) {
-                    ActivationTextField(
-                        value = uiState.farmName,
-                        onValueChange = viewModel::onFarmNameChange,
-                        placeholder = stringResource(R.string.activation_form_farmName),
-                        keyboardOptions = KeyboardOptions.Default
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
+                        ActivationTextField(
+                            value = uiState.farmName,
+                            onValueChange = viewModel::onFarmNameChange,
+                            placeholder = stringResource(R.string.activation_form_farmName),
+                            keyboardOptions = KeyboardOptions.Default,
+                            isError = uiState.farmNameError,
+                            errorText = requiredText
+                        )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                    ActivationTextField(
-                        value = uiState.farmId,
-                        onValueChange = viewModel::onFarmIdChange,
-                        placeholder = stringResource(R.string.activation_form_farmId),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                    )
+                        ActivationTextField(
+                            value = uiState.farmId,
+                            onValueChange = viewModel::onFarmIdChange,
+                            placeholder = stringResource(R.string.activation_form_farmId),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                            isError = uiState.farmIdError,
+                            errorText = requiredText
+                        )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                    ActivationTextField(
-                        value = uiState.phoneNumber,
-                        onValueChange = viewModel::onPhoneNumberChange,
-                        placeholder = stringResource(R.string.activation_form_phoneNumber),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
-                    )
+                        ActivationTextField(
+                            value = uiState.phoneNumber,
+                            onValueChange = viewModel::onPhoneNumberChange,
+                            placeholder = stringResource(R.string.activation_form_phoneNumber),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                            isError = uiState.phoneNumberError,
+                            errorText = requiredText
+                        )
 
-                    AnimatedVisibility(visible = uiState.error != null) {
-                        uiState.error?.let { err ->
+                        AnimatedVisibility(visible = uiState.error != null) {
+                            uiState.error?.let { err ->
+                                Row(
+                                    modifier = Modifier
+                                        .padding(top = 12.dp)
+                                        .fillMaxWidth()
+                                        .background(
+                                            color = GashError_RED.copy(alpha = 0.1f),
+                                            shape = RoundedCornerShape(8.dp)
+                                        )
+                                        .padding(8.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.icon_common_error_circle),
+                                        contentDescription = null,
+                                        tint = GashError_RED,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                    Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+                                    Text(
+                                        text = err.asString(),
+                                        color = GashError_RED,
+                                        fontSize = 13.sp,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                }
+                            }
+                        }
+
+                        AnimatedVisibility(visible = uiState.isSaved) {
                             Row(
                                 modifier = Modifier
                                     .padding(top = 12.dp)
                                     .fillMaxWidth()
                                     .background(
-                                        color = GashError_RED.copy(alpha = 0.1f),
+                                        color = GashGreen.copy(alpha = 0.1f),
                                         shape = RoundedCornerShape(8.dp)
                                     )
                                     .padding(8.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Icon(
-                                    painter = painterResource(R.drawable.icon_common_error_circle),
+                                    painter = painterResource(R.drawable.icon_common_check_circle),
                                     contentDescription = null,
-                                    tint = GashError_RED,
+                                    tint = GashGreen,
                                     modifier = Modifier.size(18.dp)
                                 )
                                 Spacer(modifier = Modifier.padding(horizontal = 4.dp))
                                 Text(
-                                    text = err.asString(),
-                                    color = GashError_RED,
+                                    text = stringResource(R.string.general_info_saved),
+                                    color = GashGreen,
                                     fontSize = 13.sp,
                                     fontWeight = FontWeight.Medium
                                 )
                             }
                         }
                     }
-
-                    AnimatedVisibility(visible = uiState.isSaved) {
-                        Row(
-                            modifier = Modifier
-                                .padding(top = 12.dp)
-                                .fillMaxWidth()
-                                .background(
-                                    color = GashGreen.copy(alpha = 0.1f),
-                                    shape = RoundedCornerShape(8.dp)
-                                )
-                                .padding(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.icon_common_check_circle),
-                                contentDescription = null,
-                                tint = GashGreen,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.padding(horizontal = 4.dp))
-                            Text(
-                                text = stringResource(R.string.general_info_saved),
-                                color = GashGreen,
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.Medium
-                            )
-                        }
-                    }
                 }
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 onClick = viewModel::onSaveClick,
@@ -195,9 +231,7 @@ fun GeneralInfoScreen(
                     .fillMaxWidth()
                     .height(52.dp),
                 shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = GashGreen
-                )
+                colors = ButtonDefaults.buttonColors(containerColor = GashGreen)
             ) {
                 if (uiState.isSubmitting) {
                     CircularProgressIndicator(

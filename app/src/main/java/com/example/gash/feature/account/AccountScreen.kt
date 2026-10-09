@@ -36,6 +36,7 @@ fun AccountScreen(
 ) {
     val farmName by viewModel.farmName.collectAsStateWithLifecycle()
     var isMenuExpanded by remember { mutableStateOf(false) }
+    val profileImagePath by viewModel.profileImagePath.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -44,6 +45,8 @@ fun AccountScreen(
     ) {
         AccountHeader(
             farmName = farmName.orEmpty(),
+            profileImagePath = profileImagePath,
+            onAvatarClick = onNavigateToGeneralInfo,
             isMenuExpanded = isMenuExpanded,
             onMenuClick = { isMenuExpanded = true },
             onDismissMenu = { isMenuExpanded = false },

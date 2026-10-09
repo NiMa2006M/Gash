@@ -162,6 +162,12 @@
     <string name="settings_tag3">تگ شماره ۳</string>
     <string name="about_version">نسخه %1$s</string>
 
+    <string name="general_info_change_photo">تغییر عکس</string>
+    <string name="general_info_remove_photo">حذف عکس</string>
+    <string name="error_profile_image_failed">ثبت عکس پروفایل ناموفق بود. عکس دیگری را امتحان کنید.</string>
+
+    <string name="about_copyright">تمامی حقوق این اپلیکیشن محفوظ است</string>
+
     <string name="account_placeholder">صفحه‌ی حساب کاربری به‌زودی اینجا میاد</string>
     <string name="file_transfer_placeholder">صفحه‌ی ارسال فایل به‌زودی اینجا میاد</string>
 

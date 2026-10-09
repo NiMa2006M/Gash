@@ -24,6 +24,7 @@ import com.example.gash.ui.helper.UiText
 fun RegisterNewAnimalSheet(
     error: UiText?,
     isSubmitting: Boolean,
+    onRfidCodeChange: () -> Unit,
     onConfirm: (rfidCode: String?) -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -35,7 +36,10 @@ fun RegisterNewAnimalSheet(
 
             OutlinedTextField(
                 value = rfidCode,
-                onValueChange = { rfidCode = it },
+                onValueChange = {
+                    rfidCode = it
+                    onRfidCodeChange()
+                },
                 placeholder = { Text(stringResource(R.string.herd_detail_rfid_optional_hint)) },
                 isError = error != null,
                 supportingText = error?.let { { Text(it.asString()) } },

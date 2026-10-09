@@ -60,8 +60,8 @@ fun HerdDetailScreen(
     onToggleUnassignedSelection: (Long) -> Unit,
     onConfirmAddExisting: () -> Unit,
     onRemoveAnimalFromHerd: (Long) -> Unit,
-    onConfirmRegisterNew: (String?) -> Unit
-
+    onConfirmRegisterNew: (String?) -> Unit,
+    onRfidCodeChange: () -> Unit
 ) {
     var flippedAnimalId by rememberSaveable {
         mutableStateOf<Long?>(null)
@@ -306,6 +306,7 @@ fun HerdDetailScreen(
         AddAnimalMode.RegisterNew -> RegisterNewAnimalSheet(
             error = uiState.error,
             isSubmitting = uiState.isSubmitting,
+            onRfidCodeChange = onRfidCodeChange,
             onConfirm = onConfirmRegisterNew,
             onDismiss = onDismissAddSheet
         )

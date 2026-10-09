@@ -17,14 +17,21 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun AvatarPlaceholder(
     modifier: Modifier = Modifier,
-    size: Dp = 44.dp
+    size: Dp = 44.dp,
+    containerColor: Color = Color.White.copy(alpha = 0.25f),
+    contentColor: Color = Color.White
 ) {
     Box(
         modifier = modifier
             .size(size)
-            .background(Color.White.copy(alpha = 0.25f), CircleShape),
+            .background(containerColor, CircleShape),
         contentAlignment = Alignment.Center
     ) {
-        Icon(imageVector = Icons.Filled.Person, contentDescription = null, tint = Color.White)
+        Icon(
+            imageVector = Icons.Filled.Person,
+            contentDescription = null,
+            tint = contentColor,
+            modifier = Modifier.size(size * 0.55f)
+        )
     }
 }

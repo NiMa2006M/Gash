@@ -23,12 +23,14 @@ class ActivationPreferences @Inject constructor(
         val FARM_NAME = stringPreferencesKey("farm_name")
         val FARM_ID = stringPreferencesKey("farm_id")
         val PHONE_NUMBER = stringPreferencesKey("phone_number")
+        val PROFILE_IMAGE_PATH = stringPreferencesKey("profile_image_path")
     }
 
     val isActivated: Flow<Boolean> = context.dataStore.data.map { it[Keys.IS_ACTIVATED] ?: false }
     val farmName: Flow<String?> = context.dataStore.data.map { it[Keys.FARM_NAME] }
     val farmId: Flow<String?> = context.dataStore.data.map { it[Keys.FARM_ID] }
     val phoneNumber: Flow<String?> = context.dataStore.data.map { it[Keys.PHONE_NUMBER] }
+    val profileImagePath: Flow<String?> = context.dataStore.data.map { it[Keys.PROFILE_IMAGE_PATH] }
 
     suspend fun saveActivation(farmName: String, farmId: String, phoneNumber: String) {
         context.dataStore.edit { prefs ->
@@ -41,5 +43,12 @@ class ActivationPreferences @Inject constructor(
 
     suspend fun clearActivation() {
         context.dataStore.edit { it.clear() }
+    }
+
+    suspend fun setProfileImagePath(path: String?) {
+        context.dataStore.edit { prefs ->
+            if (path == null) prefs.remove(Keys.PROFILE_IMAGE_PATH)
+            else prefs[Keys.PROFILE_IMAGE_PATH] = path
+        }
     }
 }

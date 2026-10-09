@@ -1,7 +1,5 @@
 package com.example.gash.feature.home
 
-import android.R.attr.maxHeight
-import android.R.attr.maxWidth
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +31,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gash.R
-import com.example.gash.core.ui.components.AvatarPlaceholder
+import com.example.gash.core.ui.components.ProfileAvatar
 import com.example.gash.ui.theme.GashGreen
 
 @Composable
@@ -53,9 +51,6 @@ fun HomeHeader(
             .clip(headerShape)
             .background(GashGreen)
     ) {
-
-        val screenWidth = maxWidth
-        val screenHeight = maxHeight
 
         // Pattern Layer
         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
@@ -106,7 +101,7 @@ fun HomeHeader(
                 verticalAlignment = Alignment.Top
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    AvatarPlaceholder()
+                    ProfileAvatar(imagePath = uiState.profileImagePath)
                     Spacer(Modifier.width(10.dp))
                     Column(horizontalAlignment = Alignment.Start) {
                         Text(

@@ -80,9 +80,13 @@ class HerdDetailViewModel @Inject constructor(
     }
 
     fun onAddClick() {
-        _uiState.update { it.copy(addSheetMode = AddAnimalMode.ChooseMethod) }
+        _uiState.update {
+            it.copy(
+                addSheetMode = AddAnimalMode.ChooseMethod,
+                error = null
+            )
+        }
     }
-
     fun onDismissAddSheet() {
         unassignedJob?.cancel()
         unassignedJob = null
@@ -97,7 +101,13 @@ class HerdDetailViewModel @Inject constructor(
     }
 
     fun onPickExistingSelected() {
-        _uiState.update { it.copy(addSheetMode = AddAnimalMode.PickExisting) }
+        _uiState.update {
+            it.copy(
+                addSheetMode = AddAnimalMode.PickExisting,
+                error = null
+            )
+        }
+
         unassignedJob?.cancel()
         unassignedJob = viewModelScope.launch {
             getUnassignedAnimalsUseCase().collect { animals ->
@@ -107,7 +117,12 @@ class HerdDetailViewModel @Inject constructor(
     }
 
     fun onRegisterNewSelected() {
-        _uiState.update { it.copy(addSheetMode = AddAnimalMode.RegisterNew) }
+        _uiState.update {
+            it.copy(
+                addSheetMode = AddAnimalMode.RegisterNew,
+                error = null
+            )
+        }
     }
 
     fun onToggleUnassignedSelection(animalId: Long) {
@@ -157,6 +172,14 @@ class HerdDetailViewModel @Inject constructor(
                 animalId = animalId,
                 newHerdId = null
             )
+        }
+    }
+
+    fun onRfidCodeChange() {
+        if (_uiState.value.error != null) {
+            _uiState.update {
+                it.copy(error = null)
+            }
         }
     }
 }

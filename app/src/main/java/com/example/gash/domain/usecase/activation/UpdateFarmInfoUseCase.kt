@@ -8,9 +8,16 @@ class UpdateFarmInfoUseCase @Inject constructor(
     private val repository: ActivationRepository
 ) {
     suspend operator fun invoke(farmName: String, farmId: String, phoneNumber: String): Result<Unit> {
-        if (farmName.isBlank()) {
-            return Result.failure(DomainError.EmptyFarmName)
+        val farmNameEmpty = farmName.isBlank()
+        val farmIdEmpty = farmId.isBlank()
+        val phoneNumberEmpty = phoneNumber.isBlank()
+
+        if (farmNameEmpty || farmIdEmpty || phoneNumberEmpty) {
+            return Result.failure(
+                DomainError.InvalidFarmInfo(farmNameEmpty, farmIdEmpty, phoneNumberEmpty)
+            )
         }
+
         repository.saveActivation(farmName.trim(), farmId.trim(), phoneNumber.trim())
         return Result.success(Unit)
     }
