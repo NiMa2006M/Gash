@@ -164,6 +164,8 @@
     <string name="settings_tag1">تگ شماره ۱</string>
     <string name="settings_tag2">تگ شماره ۲</string>
     <string name="settings_tag3">تگ شماره ۳</string>
+    <string name="settings_tag_default_name">تگ شماره %1$d</string>
+    <string name="settings_tag_name_hint">نام تگ</string>
     <string name="about_version">نسخه %1$s</string>
 
     <string name="about_copyright">تمامی حقوق این اپلیکیشن محفوظ است</string>

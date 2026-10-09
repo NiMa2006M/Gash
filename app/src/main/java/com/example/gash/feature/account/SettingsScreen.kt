@@ -22,8 +22,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -136,42 +134,32 @@ fun SettingsScreen(
                     }
                 }
             }
-
-            SectionTitle(title = stringResource(R.string.settings_tags_section))
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
+            tagSettings?.let { settings ->
+                SectionTitle(title = stringResource(R.string.settings_tags_section))
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
                 ) {
-                    TagToggleRow(
-                        label = stringResource(R.string.settings_tag1),
-                        checked = tagSettings.isTag1Enabled,
-                        onCheckedChange = { viewModel.onTagToggle(1, it) }
-                    )
-
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
-
-                    TagToggleRow(
-                        label = stringResource(R.string.settings_tag2),
-                        checked = tagSettings.isTag2Enabled,
-                        onCheckedChange = { viewModel.onTagToggle(2, it) }
-                    )
-
-                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
-
-                    TagToggleRow(
-                        label = stringResource(R.string.settings_tag3),
-                        checked = tagSettings.isTag3Enabled,
-                        onCheckedChange = { viewModel.onTagToggle(3, it) }
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        settings.tags.forEachIndexed { index, config ->
+                            TagSettingRow(
+                                config = config,
+                                onEnabledChange = { viewModel.onTagToggle(config.slot, it) },
+                                onNameChange = { viewModel.onTagNameChange(config.slot, it) }
+                            )
+                            if (index < settings.tags.lastIndex) {
+                                HorizontalDivider(
+                                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -187,35 +175,4 @@ private fun SectionTitle(title: String) {
         fontWeight = FontWeight.SemiBold,
         modifier = Modifier.padding(start = 4.dp)
     )
-}
-
-@Composable
-private fun TagToggleRow(
-    label: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 10.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = label,
-            fontSize = 15.sp,
-            fontWeight = FontWeight.Medium,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.weight(1f)
-        )
-        Switch(
-            checked = checked,
-            onCheckedChange = onCheckedChange,
-            colors = SwitchDefaults.colors(
-                checkedThumbColor = MaterialTheme.colorScheme.surface,
-                checkedTrackColor = GashGreen
-            )
-        )
-    }
 }

@@ -3,6 +3,7 @@ package com.example.gash.core.datastore
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -16,17 +17,25 @@ private val Context.tagSettingsDataStore by preferencesDataStore(name = "tag_set
 class TagSettingsPreferences @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    private object Keys {
-        val TAG1_ENABLED = booleanPreferencesKey("tag1_enabled")
-        val TAG2_ENABLED = booleanPreferencesKey("tag2_enabled")
-        val TAG3_ENABLED = booleanPreferencesKey("tag3_enabled")
+    fun observeTags(slots: IntRange): Flow<List<StoredTag>> =
+        context.tagSettingsDataStore.data.map { prefs ->
+            slots.map { slot ->
+                StoredTag(
+                    slot = slot,
+                    isEnabled = prefs[enabledKey(slot)] ?: false,
+                    name = prefs[nameKey(slot)].orEmpty()
+                )
+            }
+        }
+
+    suspend fun setEnabled(slot: Int, enabled: Boolean) {
+        context.tagSettingsDataStore.edit { it[enabledKey(slot)] = enabled }
     }
 
-    val isTag1Enabled: Flow<Boolean> = context.tagSettingsDataStore.data.map { it[Keys.TAG1_ENABLED] ?: false }
-    val isTag2Enabled: Flow<Boolean> = context.tagSettingsDataStore.data.map { it[Keys.TAG2_ENABLED] ?: false }
-    val isTag3Enabled: Flow<Boolean> = context.tagSettingsDataStore.data.map { it[Keys.TAG3_ENABLED] ?: false }
+    suspend fun setName(slot: Int, name: String) {
+        context.tagSettingsDataStore.edit { it[nameKey(slot)] = name }
+    }
 
-    suspend fun setTag1Enabled(enabled: Boolean) = context.tagSettingsDataStore.edit { it[Keys.TAG1_ENABLED] = enabled }
-    suspend fun setTag2Enabled(enabled: Boolean) = context.tagSettingsDataStore.edit { it[Keys.TAG2_ENABLED] = enabled }
-    suspend fun setTag3Enabled(enabled: Boolean) = context.tagSettingsDataStore.edit { it[Keys.TAG3_ENABLED] = enabled }
+    private fun enabledKey(slot: Int) = booleanPreferencesKey("tag${slot}_enabled")
+    private fun nameKey(slot: Int) = stringPreferencesKey("tag${slot}_name")
 }

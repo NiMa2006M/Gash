@@ -1,12 +1,13 @@
+// SetTagNameUseCase.kt  (جدید)
 package com.example.gash.domain.usecase.settings
 
 import com.example.gash.domain.model.TagSettings
 import com.example.gash.domain.repository.TagSettingsRepository
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ObserveTagSettingsUseCase @Inject constructor(
+class SetTagNameUseCase @Inject constructor(
     private val repository: TagSettingsRepository
 ) {
-    operator fun invoke(): Flow<TagSettings> = repository.settings
+    suspend operator fun invoke(slot: Int, name: String) =
+        repository.setTagName(slot, name.trim().take(TagSettings.MAX_NAME_LENGTH))
 }

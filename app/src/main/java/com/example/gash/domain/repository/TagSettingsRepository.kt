@@ -1,14 +1,10 @@
 package com.example.gash.domain.repository
 
+import com.example.gash.domain.model.TagSettings
 import kotlinx.coroutines.flow.Flow
-
-data class TagSettings(
-    val isTag1Enabled: Boolean,
-    val isTag2Enabled: Boolean,
-    val isTag3Enabled: Boolean
-)
 
 interface TagSettingsRepository {
     val settings: Flow<TagSettings>
-    suspend fun setTagEnabled(tagNumber: Int, enabled: Boolean)
+    suspend fun setTagEnabled(slot: Int, enabled: Boolean)
+    suspend fun setTagName(slot: Int, name: String)
 }
