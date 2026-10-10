@@ -82,9 +82,9 @@
     <string name="operation_weaning">قطع شیر</string>
     <string name="operation_disease">بیماری</string>
 
-    <string name="home_shortcut_weight">وزن گیری دام</string>
-    <string name="home_shortcut_operations_census">عملیات و سرشماری</string>
-    <string name="home_shortcut_herd_management">مدیریت گله</string>
+    <string name="home_shortcut_weight">وزن گیری</string>
+    <string name="home_shortcut_operations_census">عملیات</string>
+    <string name="home_shortcut_herd_management">مدیریت</string>
 
     <string name="home_device_reference">شناسه موبایل وارد شده %1$s</string>
     <string name="home_total_animals_label">تعداد کل گوسفندان</string>
@@ -127,6 +127,8 @@
     <string name="herd_detail_search_hint">جستجو بر اساس شماره دام، (RFID) یا تگ</string>
     <string name="herd_detail_no_search_results">هیچ دامی با این مشخصات پیدا نشد</string>
     <string name="herd_detail_culling_from_herd">حذف از گله</string>
+    <string name="herd_detail_view_list">نمایش لیستی</string>
+    <string name="herd_detail_view_grid">نمایش مربعی</string>
 
     <!-- ANIMAL DETAIL -->
     <string name="animal_detail_status_active">فعال</string>

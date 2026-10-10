@@ -14,9 +14,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -68,6 +70,9 @@ fun HerdDetailScreen(
     }
     var ignoreNextPointerUp by remember {
         mutableStateOf(false)
+    }
+    var isGridView by rememberSaveable {
+        mutableStateOf(true)
     }
 
     Scaffold(
@@ -162,24 +167,28 @@ fun HerdDetailScreen(
                     )
                 }
 
-//                Box(
-//                    modifier = Modifier
-//                        .clip(RoundedCornerShape(14.dp))
-//                        .background(
-//                            GashGreen.copy(alpha = 0.10f)
-//                        )
-//                        .padding(
-//                            horizontal = 12.dp,
-//                            vertical = 9.dp
-//                        ),
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Default.Check,
-//                        contentDescription = null,
-//                        tint = GashGreen
-//                    )
-//                }
+                IconButton(
+                    onClick = {
+                        isGridView = !isGridView
+                        flippedAnimalId = null
+                    }
+                ) {
+                    Icon(
+                        painter = if (isGridView) {
+                            painterResource(R.drawable.icon_herd_management_list_view)
+                        } else {
+                            painterResource(R.drawable.icon_herd_management_grid_view)
+                        },
+                        contentDescription = stringResource(
+                            if (isGridView) {
+                                R.string.herd_detail_view_list
+                            } else {
+                                R.string.herd_detail_view_grid
+                            }
+                        ),
+                        tint = GashGreen
+                    )
+                }
             }
 
             if (uiState.animals.isNotEmpty()) {
@@ -248,41 +257,73 @@ fun HerdDetailScreen(
                         }
                     }
                 }
-                else -> LazyVerticalGrid(
-                    columns = GridCells.Fixed(3),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    verticalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
-                ) {
-
-                    items(
-                        items = uiState.filteredAnimals,
-                        key = { it.id }
-                    ) { animal ->
-
-                        AnimalCard(
-                            animal = animal,
-
-                            isFlipped = flippedAnimalId == animal.id,
-
-                            onClick = {
-                                onAnimalClick(animal.id)
-                            },
-
-                            onLongClick = {
-                                ignoreNextPointerUp = true
-                                flippedAnimalId = animal.id
-                            },
-
-                            onFlipBack = {
-                                flippedAnimalId = null
-                            },
-
-                            onRemoveFromHerd = {
-                                flippedAnimalId = null
-                                onRemoveAnimalFromHerd(animal.id)
+                else -> {
+                    if (isGridView) {
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(3),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                            verticalArrangement = Arrangement.spacedBy(10.dp),
+                            contentPadding = PaddingValues(
+                                horizontal = 16.dp,
+                                vertical = 12.dp
+                            )
+                        ) {
+                            items(
+                                items = uiState.filteredAnimals,
+                                key = { it.id }
+                            ) { animal ->
+                                AnimalCard(
+                                    animal = animal,
+                                    isFlipped = flippedAnimalId == animal.id,
+                                    onClick = {
+                                        onAnimalClick(animal.id)
+                                    },
+                                    onLongClick = {
+                                        ignoreNextPointerUp = true
+                                        flippedAnimalId = animal.id
+                                    },
+                                    onFlipBack = {
+                                        flippedAnimalId = null
+                                    },
+                                    onRemoveFromHerd = {
+                                        flippedAnimalId = null
+                                        onRemoveAnimalFromHerd(animal.id)
+                                    }
+                                )
                             }
-                        )
+                        }
+                    } else {
+                        LazyColumn(
+                            contentPadding = PaddingValues(
+                                horizontal = 16.dp,
+                                vertical = 12.dp
+                            ),
+                            verticalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            items(
+                                items = uiState.filteredAnimals,
+                                key = { it.id }
+                            ) { animal ->
+                                AnimalListItem(
+                                    animal = animal,
+                                    isFlipped = flippedAnimalId == animal.id,
+                                    onClick = {
+                                        onAnimalClick(animal.id)
+                                    },
+                                    onLongClick = {
+                                        ignoreNextPointerUp = true
+                                        flippedAnimalId = animal.id
+                                    },
+                                    onFlipBack = {
+                                        flippedAnimalId = null
+                                    },
+                                    onRemoveFromHerd = {
+                                        flippedAnimalId = null
+                                        onRemoveAnimalFromHerd(animal.id)
+                                    }
+                                )
+                            }
+                        }
                     }
                 }
             }
