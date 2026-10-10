@@ -149,6 +149,9 @@
     <string name="animal_detail_expire_confirm_title">منقضی کردن دام</string>
     <string name="animal_detail_expire_confirm_message">این دام منقضی علامت‌گذاری می‌شه و از لیست‌های فعال خارج می‌شه. تگ فعالش هم آزاد می‌شه.</string>
     <string name="animal_detail_restore_button">فعال‌سازی مجدد</string>
+    <string name="animal_detail_tags_title">تگ‌ها</string>
+    <string name="animal_detail_tag_not_set">ثبت نشده</string>
+    <string name="animal_detail_edit_tags_title">ویرایش تگ‌ها</string>
 
     <!-- ACCOUNT -->
     <string name="account_logout">خروج از حساب</string>

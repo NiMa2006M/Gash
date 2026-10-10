@@ -1,8 +1,13 @@
 package com.example.gash.feature.herd
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
@@ -17,21 +22,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.gash.R
+import com.example.gash.domain.model.AnimalTags
+import com.example.gash.domain.model.TagConfig
+import com.example.gash.feature.animal.AnimalTagFields
 import com.example.gash.ui.helper.UiText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterNewAnimalSheet(
+    tagConfigs: List<TagConfig>,
     error: UiText?,
     isSubmitting: Boolean,
     onRfidCodeChange: () -> Unit,
-    onConfirm: (rfidCode: String?) -> Unit,
+    onConfirm: (rfidCode: String?, tags: AnimalTags) -> Unit,
     onDismiss: () -> Unit
 ) {
     var rfidCode by remember { mutableStateOf("") }
+    var tags by remember { mutableStateOf(AnimalTags.EMPTY) }
 
     ModalBottomSheet(onDismissRequest = onDismiss) {
-        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .imePadding()
+                .padding(horizontal = 20.dp, vertical = 8.dp)
+        ) {
             Text(text = stringResource(R.string.herd_detail_register_new_title))
 
             OutlinedTextField(
@@ -47,8 +63,17 @@ fun RegisterNewAnimalSheet(
                 modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
             )
 
+            if (tagConfigs.isNotEmpty()) {
+                AnimalTagFields(
+                    tagConfigs = tagConfigs,
+                    values = tags,
+                    onValueChange = { slot, value -> tags = tags.withValue(slot, value) }
+                )
+                Spacer(Modifier.height(12.dp))
+            }
+
             Button(
-                onClick = { onConfirm(rfidCode) },
+                onClick = { onConfirm(rfidCode, tags) },
                 enabled = !isSubmitting,
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
             ) {

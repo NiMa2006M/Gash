@@ -13,6 +13,7 @@ import com.example.gash.data.repository.ProfileImageRepositoryImpl
 import com.example.gash.data.repository.RfidTagRepositoryImpl
 import com.example.gash.data.repository.TagSettingsRepositoryImpl
 import com.example.gash.data.repository.WeightRecordRepositoryImpl
+import com.example.gash.data.transaction.RoomTransactionRunner
 import com.example.gash.domain.repository.ActivationRepository
 import com.example.gash.domain.repository.AnimalRepository
 import com.example.gash.domain.repository.HerdRepository
@@ -20,6 +21,7 @@ import com.example.gash.domain.repository.ProfileImageRepository
 import com.example.gash.domain.repository.RfidTagRepository
 import com.example.gash.domain.repository.TagSettingsRepository
 import com.example.gash.domain.repository.WeightRecordRepository
+import com.example.gash.domain.transaction.TransactionRunner
 
 import dagger.Binds
 import dagger.Module
@@ -71,4 +73,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindProfileImageRepository(impl: ProfileImageRepositoryImpl): ProfileImageRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTransactionRunner(impl: RoomTransactionRunner): TransactionRunner
 }

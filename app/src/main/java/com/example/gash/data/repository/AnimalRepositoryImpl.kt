@@ -5,6 +5,7 @@ import com.example.gash.core.database.dao.RfidTagDao
 import com.example.gash.core.database.entity.AnimalEntity
 import com.example.gash.data.mapper.toDomain
 import com.example.gash.domain.model.Animal
+import com.example.gash.domain.model.AnimalTags
 import com.example.gash.domain.repository.AnimalRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -42,9 +43,17 @@ class AnimalRepositoryImpl @Inject constructor(
         return entity.toDomain(activeRfidCode = activeTag?.code)
     }
 
-    override suspend fun registerAnimal(herdId: Long?): Long =
-        animalDao.insert(AnimalEntity(herdId = herdId, createdAt = System.currentTimeMillis(), expiredAt = null))
-
+    override suspend fun registerAnimal(herdId: Long?, tags: AnimalTags): Long =
+        animalDao.insert(
+            AnimalEntity(
+                herdId = herdId,
+                createdAt = System.currentTimeMillis(),
+                expiredAt = null,
+                tag1 = tags.tag1,
+                tag2 = tags.tag2,
+                tag3 = tags.tag3
+            )
+        )
     override suspend fun moveToHerd(animalId: Long, herdId: Long?) {
         animalDao.moveToHerd(animalId, herdId)
     }
@@ -59,5 +68,9 @@ class AnimalRepositoryImpl @Inject constructor(
 
     override suspend fun restoreAnimal(animalId: Long) {
         animalDao.setExpiredAt(animalId, null)
+    }
+
+    override suspend fun updateAnimalTags(animalId: Long, tags: AnimalTags) {
+        animalDao.updateTags(animalId, tags.tag1, tags.tag2, tags.tag3)
     }
 }

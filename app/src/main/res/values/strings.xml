@@ -148,6 +148,9 @@
     <string name="animal_detail_expire_confirm_title">Mark Animal as Expired</string>
     <string name="animal_detail_expire_confirm_message">This animal will be marked expired and removed from active lists. Its active RFID tag will also be freed.</string>
     <string name="animal_detail_restore_button">Restore</string>
+    <string name="animal_detail_tags_title">Tags</string>
+    <string name="animal_detail_tag_not_set">Not set</string>
+    <string name="animal_detail_edit_tags_title">Edit Tags</string>
 
     <!-- ACCOUNT -->
     <string name="account_logout">Log Out</string>

@@ -5,12 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.gash.core.navigation.GashRoute
+import com.example.gash.domain.model.AnimalTags
 import com.example.gash.domain.usecase.animal.ExpireAnimalUseCase
 import com.example.gash.domain.usecase.animal.MoveAnimalToHerdUseCase
 import com.example.gash.domain.usecase.animal.ObserveAnimalUseCase
 import com.example.gash.domain.usecase.animal.RestoreAnimalUseCase
+import com.example.gash.domain.usecase.animal.UpdateAnimalTagsUseCase
 import com.example.gash.domain.usecase.herd.GetHerdsUseCase
 import com.example.gash.domain.usecase.herd.ObserveHerdUseCase
+import com.example.gash.domain.usecase.settings.ObserveTagSettingsUseCase
 import com.example.gash.domain.usecase.weight.GetWeightHistoryUseCase
 import com.example.gash.domain.usecase.weight.RecordWeightUseCase
 import com.example.gash.ui.helper.toUiText
@@ -33,7 +36,9 @@ class AnimalDetailViewModel @Inject constructor(
     private val recordWeightUseCase: RecordWeightUseCase,
     private val moveAnimalToHerdUseCase: MoveAnimalToHerdUseCase,
     private val expireAnimalUseCase: ExpireAnimalUseCase,
-    private val restoreAnimalUseCase: RestoreAnimalUseCase
+    private val restoreAnimalUseCase: RestoreAnimalUseCase,
+    private val observeTagSettingsUseCase: ObserveTagSettingsUseCase,
+    private val updateAnimalTagsUseCase: UpdateAnimalTagsUseCase
 ) : ViewModel() {
 
     private val animalId: Long = savedStateHandle.toRoute<GashRoute.AnimalDetail>().animalId
@@ -53,6 +58,11 @@ class AnimalDetailViewModel @Inject constructor(
         viewModelScope.launch {
             getWeightHistoryUseCase(animalId).collect { history ->
                 _uiState.update { it.copy(weightHistory = history) }
+            }
+        }
+        viewModelScope.launch {
+            observeTagSettingsUseCase().collect { settings ->
+                _uiState.update { it.copy(enabledTags = settings.enabledTags) }
             }
         }
     }
@@ -84,6 +94,25 @@ class AnimalDetailViewModel @Inject constructor(
             val result = recordWeightUseCase(animalId, weightKg)
             _uiState.update {
                 if (result.isSuccess) it.copy(isSubmitting = false, isRecordWeightSheetOpen = false)
+                else it.copy(isSubmitting = false, error = result.exceptionOrNull()?.toUiText())
+            }
+        }
+    }
+
+    fun onEditTagsClick() {
+        _uiState.update { it.copy(isEditTagsSheetOpen = true, error = null) }
+    }
+
+    fun onDismissEditTags() {
+        _uiState.update { it.copy(isEditTagsSheetOpen = false, error = null) }
+    }
+
+    fun onConfirmEditTags(tags: AnimalTags) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isSubmitting = true) }
+            val result = updateAnimalTagsUseCase(animalId, tags)
+            _uiState.update {
+                if (result.isSuccess) it.copy(isSubmitting = false, isEditTagsSheetOpen = false)
                 else it.copy(isSubmitting = false, error = result.exceptionOrNull()?.toUiText())
             }
         }

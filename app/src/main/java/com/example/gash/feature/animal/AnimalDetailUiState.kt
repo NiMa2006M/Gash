@@ -2,6 +2,7 @@ package com.example.gash.feature.animal
 
 import com.example.gash.domain.model.Animal
 import com.example.gash.domain.model.Herd
+import com.example.gash.domain.model.TagConfig
 import com.example.gash.domain.model.WeightRecord
 import com.example.gash.ui.helper.UiText
 
@@ -14,5 +15,7 @@ data class AnimalDetailUiState(
     val isRecordWeightSheetOpen: Boolean = false,
     val isExpireConfirmOpen: Boolean = false,
     val error: UiText? = null,
-    val isSubmitting: Boolean = false
+    val isSubmitting: Boolean = false,
+    val enabledTags: List<TagConfig> = emptyList(),
+    val isEditTagsSheetOpen: Boolean = false
 )

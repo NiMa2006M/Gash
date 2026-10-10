@@ -1,7 +1,5 @@
 package com.example.gash.feature.animal
 
-import android.R.attr.icon
-import android.R.id.icon
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,9 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -40,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gash.R
+import com.example.gash.domain.model.AnimalTags
 import com.example.gash.ui.theme.GashBackground_GRAY
 import com.example.gash.ui.theme.GashError_RED
 import com.example.gash.ui.theme.GashFieldBackground
@@ -53,6 +50,9 @@ fun AnimalDetailScreen(
     onRecordWeightClick: () -> Unit,
     onDismissRecordWeight: () -> Unit,
     onConfirmRecordWeight: (Double) -> Unit,
+    onEditTagsClick: () -> Unit,
+    onDismissEditTags: () -> Unit,
+    onConfirmEditTags: (AnimalTags) -> Unit,
     onMoveHerdClick: () -> Unit,
     onDismissMoveHerd: () -> Unit,
     onHerdSelected: (Long) -> Unit,
@@ -131,6 +131,16 @@ fun AnimalDetailScreen(
                     value = if (isExpired) stringResource(R.string.animal_detail_status_expired) else stringResource(R.string.animal_detail_status_active),
                     label = stringResource(R.string.animal_detail_status_label),
                     modifier = Modifier.weight(1f)
+                )
+            }
+
+            if (uiState.enabledTags.isNotEmpty() && animal != null) {
+                AnimalTagsCard(
+                    tagConfigs = uiState.enabledTags,
+                    tags = animal.tags,
+                    canEdit = !isExpired,
+                    onEditClick = onEditTagsClick,
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
                 )
             }
 
@@ -219,6 +229,17 @@ fun AnimalDetailScreen(
 
     if (uiState.isExpireConfirmOpen) {
         ExpireConfirmDialog(onConfirm = onConfirmExpire, onDismiss = onDismissExpireConfirm)
+    }
+
+    if (uiState.isEditTagsSheetOpen && animal != null) {
+        EditTagsSheet(
+            tagConfigs = uiState.enabledTags,
+            initialTags = animal.tags,
+            error = uiState.error,
+            isSubmitting = uiState.isSubmitting,
+            onConfirm = onConfirmEditTags,
+            onDismiss = onDismissEditTags
+        )
     }
 }
 

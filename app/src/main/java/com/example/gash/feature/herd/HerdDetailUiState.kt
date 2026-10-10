@@ -2,6 +2,7 @@ package com.example.gash.feature.herd
 
 import com.example.gash.domain.model.Animal
 import com.example.gash.domain.model.Herd
+import com.example.gash.domain.model.TagConfig
 import com.example.gash.ui.helper.UiText
 
 data class HerdDetailUiState(
@@ -13,7 +14,8 @@ data class HerdDetailUiState(
     val unassignedAnimals: List<Animal> = emptyList(),
     val selectedUnassignedIds: Set<Long> = emptySet(),
     val error: UiText? = null,
-    val isSubmitting: Boolean = false
+    val isSubmitting: Boolean = false,
+    val enabledTags: List<TagConfig> = emptyList()
 )
 
 sealed interface AddAnimalMode {

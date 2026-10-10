@@ -65,6 +65,9 @@ interface AnimalDao {
     @Query("UPDATE animals SET herdId = :herdId WHERE id = :animalId")
     suspend fun moveToHerd(animalId: Long, herdId: Long?)
 
+    @Query("UPDATE animals SET tag1 = :tag1, tag2 = :tag2, tag3 = :tag3 WHERE id = :animalId")
+    suspend fun updateTags(animalId: Long, tag1: String?, tag2: String?, tag3: String?)
+
     @Query("UPDATE animals SET expiredAt = :expiredAt WHERE id = :animalId")
     suspend fun setExpiredAt(animalId: Long, expiredAt: Long?)
 

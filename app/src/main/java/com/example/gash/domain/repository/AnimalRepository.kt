@@ -1,6 +1,7 @@
 package com.example.gash.domain.repository
 
 import com.example.gash.domain.model.Animal
+import com.example.gash.domain.model.AnimalTags
 import kotlinx.coroutines.flow.Flow
 
 interface AnimalRepository {
@@ -11,7 +12,8 @@ interface AnimalRepository {
     fun observeTotalCount(): Flow<Int>
     fun observeAnimal(animalId: Long): Flow<Animal?>
     suspend fun getAnimal(id: Long): Animal?
-    suspend fun registerAnimal(herdId: Long?): Long
+    suspend fun registerAnimal(herdId: Long?, tags: AnimalTags = AnimalTags.EMPTY): Long
+    suspend fun updateAnimalTags(animalId: Long, tags: AnimalTags)
     suspend fun moveToHerd(animalId: Long, herdId: Long?)
     suspend fun expireAnimal(animalId: Long, expiredAt: Long = System.currentTimeMillis())
     suspend fun restoreAnimal(animalId: Long)

@@ -44,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gash.R
+import com.example.gash.domain.model.AnimalTags
 import com.example.gash.ui.theme.GashGreen
 import com.example.gash.ui.theme.GashSurface
 import com.example.gash.ui.theme.GashTextPrimary
@@ -62,7 +63,7 @@ fun HerdDetailScreen(
     onToggleUnassignedSelection: (Long) -> Unit,
     onConfirmAddExisting: () -> Unit,
     onRemoveAnimalFromHerd: (Long) -> Unit,
-    onConfirmRegisterNew: (String?) -> Unit,
+    onConfirmRegisterNew: (String?, AnimalTags) -> Unit,
     onRfidCodeChange: () -> Unit
 ) {
     var flippedAnimalId by rememberSaveable {
@@ -345,6 +346,7 @@ fun HerdDetailScreen(
             onDismiss = onDismissAddSheet
         )
         AddAnimalMode.RegisterNew -> RegisterNewAnimalSheet(
+            tagConfigs = uiState.enabledTags,
             error = uiState.error,
             isSubmitting = uiState.isSubmitting,
             onRfidCodeChange = onRfidCodeChange,

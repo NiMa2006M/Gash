@@ -6,11 +6,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.gash.core.navigation.GashRoute
 import com.example.gash.domain.model.Animal
+import com.example.gash.domain.model.AnimalTags
 import com.example.gash.domain.usecase.animal.GetAnimalsUseCase
 import com.example.gash.domain.usecase.animal.GetUnassignedAnimalsUseCase
 import com.example.gash.domain.usecase.animal.MoveAnimalToHerdUseCase
 import com.example.gash.domain.usecase.animal.RegisterAnimalUseCase
 import com.example.gash.domain.usecase.herd.ObserveHerdUseCase
+import com.example.gash.domain.usecase.settings.ObserveTagSettingsUseCase
 import com.example.gash.ui.helper.toUiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -26,6 +28,7 @@ import javax.inject.Inject
 class HerdDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     observeHerdUseCase: ObserveHerdUseCase,
+    observeTagSettingsUseCase: ObserveTagSettingsUseCase,
     getAnimalsUseCase: GetAnimalsUseCase,
     private val getUnassignedAnimalsUseCase: GetUnassignedAnimalsUseCase,
     private val moveAnimalToHerdUseCase: MoveAnimalToHerdUseCase,
@@ -59,6 +62,11 @@ class HerdDetailViewModel @Inject constructor(
                         filteredAnimals = filterAnimals(animals, query)
                     )
                 }
+            }
+        }
+        viewModelScope.launch {
+            observeTagSettingsUseCase().collect { settings ->
+                _uiState.update { it.copy(enabledTags = settings.enabledTags) }
             }
         }
     }
@@ -155,10 +163,10 @@ class HerdDetailViewModel @Inject constructor(
         }
     }
 
-    fun onConfirmRegisterNew(rfidCode: String?) {
+    fun onConfirmRegisterNew(rfidCode: String?, tags: AnimalTags) {
         viewModelScope.launch {
             _uiState.update { it.copy(isSubmitting = true) }
-            val result = registerAnimalUseCase(herdId, rfidCode?.takeIf { it.isNotBlank() })
+            val result = registerAnimalUseCase(herdId, rfidCode?.takeIf { it.isNotBlank() }, tags)
             _uiState.update {
                 if (result.isSuccess) it.copy(isSubmitting = false, addSheetMode = null)
                 else it.copy(isSubmitting = false, error = result.exceptionOrNull()?.toUiText())

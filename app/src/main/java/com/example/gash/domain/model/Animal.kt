@@ -9,4 +9,6 @@ data class Animal(
     val tag1: String? = null,
     val tag2: String? = null,
     val tag3: String? = null
-)
+) {
+    val tags: AnimalTags get() = AnimalTags(tag1, tag2, tag3)
+}
