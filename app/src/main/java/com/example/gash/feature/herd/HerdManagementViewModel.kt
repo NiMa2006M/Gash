@@ -7,6 +7,7 @@ import com.example.gash.domain.usecase.herd.AddHerdUseCase
 import com.example.gash.domain.usecase.herd.DeleteHerdUseCase
 import com.example.gash.domain.usecase.herd.GetHerdsUseCase
 import com.example.gash.domain.usecase.herd.RenameHerdUseCase
+import com.example.gash.ui.helper.normalizedForSearch
 import com.example.gash.ui.helper.toUiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,9 +31,21 @@ class HerdManagementViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             getHerdsUseCase().collect { herds ->
-                _uiState.update { it.copy(herds = herds) }
+                _uiState.update {
+                    it.copy(herds = herds, filteredHerds = filterHerds(herds, it.searchQuery))
+                }
             }
         }
+    }
+
+    fun onSearchQueryChange(query: String) {
+        _uiState.update { it.copy(searchQuery = query, filteredHerds = filterHerds(it.herds, query)) }
+    }
+
+    private fun filterHerds(herds: List<Herd>, query: String): List<Herd> {
+        val normalizedQuery = query.normalizedForSearch()
+        if (normalizedQuery.isEmpty()) return herds
+        return herds.filter { it.name.normalizedForSearch().contains(normalizedQuery) }
     }
 
     fun onAddClick() {

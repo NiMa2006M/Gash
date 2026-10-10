@@ -105,6 +105,8 @@
     <string name="herd_management_name_hint">نام گله</string>
     <string name="herd_management_delete_dialog_title">حذف گله</string>
     <string name="herd_management_delete_dialog_message">گله‌ی «%1$s» حذف بشه؟ دام‌های این گله پاک نمی‌شن، فقط بی‌گله می‌مونن.</string>
+    <string name="herd_management_search_hint">جستجوی گله</string>
+    <string name="herd_management_no_search_results">گله‌ای با این نام پیدا نشد</string>
     <string name="herd_menu_rename">ویرایش نام</string>
     <string name="herd_menu_delete">حذف</string>
 

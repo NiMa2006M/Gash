@@ -104,6 +104,8 @@
     <string name="herd_management_name_hint">Herd name</string>
     <string name="herd_management_delete_dialog_title">Delete Herd</string>
     <string name="herd_management_delete_dialog_message">Delete herd "%1$s"? Its animals won\'t be deleted, they\'ll just become unassigned.</string>
+    <string name="herd_management_search_hint">Search herds</string>
+    <string name="herd_management_no_search_results">No herds matched your search</string>
     <string name="herd_menu_rename">Rename</string>
     <string name="herd_menu_delete">Delete</string>
 

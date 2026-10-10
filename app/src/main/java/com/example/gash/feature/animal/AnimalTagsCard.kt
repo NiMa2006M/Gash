@@ -1,19 +1,29 @@
 package com.example.gash.feature.animal
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -22,8 +32,11 @@ import com.example.gash.R
 import com.example.gash.domain.model.AnimalTags
 import com.example.gash.domain.model.TagConfig
 import com.example.gash.ui.theme.GashBorder
+import com.example.gash.ui.theme.GashOrange
 import com.example.gash.ui.theme.GashTextPrimary
 import com.example.gash.ui.theme.GashTextSecondary
+import java.util.Vector
+import kotlin.contracts.contract
 
 @Composable
 fun AnimalTagsCard(
@@ -50,7 +63,9 @@ fun AnimalTagsCard(
                 color = GashTextPrimary
             )
             if (canEdit) {
-                TextButton(onClick = onEditClick) {
+                OutlinedButton(onClick = onEditClick, colors = ButtonDefaults.buttonColors(containerColor = GashOrange, contentColor = Color.White)) {
+                    Icon(imageVector = Icons.Outlined.Edit, contentDescription = stringResource(R.string.common_btn_edit))
+                    Spacer(Modifier.width(4.dp))
                     Text(text = stringResource(R.string.common_btn_edit))
                 }
             }

@@ -124,10 +124,7 @@ private fun AnimalCardFront(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(
-                horizontal = 12.dp,
-                vertical = 6.dp
-            ),
+            .padding(horizontal = 12.dp, vertical = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -135,38 +132,49 @@ private fun AnimalCardFront(
             modifier = Modifier
                 .size(48.dp)
                 .clip(CircleShape)
-                .background(
-                    GashGreen.copy(alpha = 0.12f)
-                ),
+                .background(GashGreen.copy(alpha = 0.12f)),
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                painter = painterResource(
-                    R.drawable.icon_herd_management
-                ),
+                painter = painterResource(R.drawable.icon_herd_management),
                 contentDescription = null,
                 tint = GashGreen,
                 modifier = Modifier.size(28.dp)
             )
         }
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+        Text(
+            text = animal.activeRfidCode
+                ?.takeIf { it.isNotBlank() }
+                ?: stringResource(R.string.animal_list_item_no_rfid),
+            color = if (animal.activeRfidCode.isNullOrBlank()) {
+                GashDanger_RED
+            } else {
+                GashTextSecondary
+            },
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            textAlign = TextAlign.Center
+        )
+
+        Box(
+            modifier = Modifier
+                .clip(RoundedCornerShape(16.dp))
+                .background(GashTextSecondary.copy(alpha = 0.08f))
+                .padding(horizontal = 16.dp, vertical = 2.dp),
+            contentAlignment = Alignment.Center
         ) {
             Text(
                 text = stringResource(
                     R.string.animal_list_item_title,
                     animal.id
                 ),
-                color = GashTextPrimary,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Bold,
+                color = GashTextSecondary,
+                fontSize = 11.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
-            )
-
-            RfidBadge(
-                rfidCode = animal.activeRfidCode
             )
         }
     }
@@ -217,49 +225,45 @@ private fun AnimalCardBack(
         )
     }
 }
-
-@Composable
-private fun RfidBadge(
-    rfidCode: String?,
-    modifier: Modifier = Modifier
-) {
-    val hasRfid = !rfidCode.isNullOrBlank()
-
-    val badgeBg = if (hasRfid) {
-        GashTextSecondary.copy(alpha = 0.08f)
-    } else {
-        Color(0xFFFFEBEE)
-    }
-
-    val textColor = if (hasRfid) {
-        GashTextSecondary
-    } else {
-        GashDanger_RED
-    }
-
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(8.dp))
-            .background(badgeBg)
-            .padding(
-                horizontal = 8.dp,
-                vertical = 0.dp
-            )
-    ) {
-        Text(
-            text = rfidCode
-                ?: stringResource(
-                    R.string.animal_list_item_no_rfid
-                ),
-            color = textColor,
-            fontSize = 10.sp,
-            fontWeight = if (hasRfid) {
-                FontWeight.Medium
-            } else {
-                FontWeight.Normal
-            },
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis
-        )
-    }
-}
+//@Composable
+//private fun RfidBadge(
+//    rfidCode: String?,
+//    modifier: Modifier = Modifier
+//) {
+//    val hasRfid = !rfidCode.isNullOrBlank()
+//
+//    Box(
+//        modifier = modifier
+//            .clip(RoundedCornerShape(8.dp))
+//            .background(
+//                if (hasRfid) {
+//                    GashGreen.copy(alpha = 0.12f)
+//                } else {
+//                    Color(0xFFFFEBEE)
+//                }
+//            )
+//            .padding(
+//                horizontal = 4.dp,
+//                vertical = 4.dp
+//            ),
+//        contentAlignment = Alignment.Center
+//    ) {
+//        Text(
+//            text = rfidCode
+//                ?.takeIf { it.isNotBlank() }
+//                ?: stringResource(
+//                    R.string.animal_list_item_no_rfid
+//                ),
+//            color = if (hasRfid) {
+//                GashGreen
+//            } else {
+//                GashDanger_RED
+//            },
+//            fontSize = 12.sp,
+//            fontWeight = FontWeight.Bold,
+//            textAlign = TextAlign.Center,
+//            maxLines = 1,
+//            overflow = TextOverflow.Ellipsis
+//        )
+//    }
+//}

@@ -126,7 +126,7 @@ fun HomeHeader(
                 )
             }
 
-            Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(16.dp))
 
             Text(
                 text = stringResource(R.string.home_total_animals_count, uiState.totalAnimalCount),
@@ -144,7 +144,7 @@ fun HomeHeader(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(Modifier.height(28.dp))
+            Spacer(Modifier.height(20.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),

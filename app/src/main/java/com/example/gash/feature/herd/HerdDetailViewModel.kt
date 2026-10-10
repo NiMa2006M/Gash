@@ -13,6 +13,7 @@ import com.example.gash.domain.usecase.animal.MoveAnimalToHerdUseCase
 import com.example.gash.domain.usecase.animal.RegisterAnimalUseCase
 import com.example.gash.domain.usecase.herd.ObserveHerdUseCase
 import com.example.gash.domain.usecase.settings.ObserveTagSettingsUseCase
+import com.example.gash.ui.helper.normalizedForSearch
 import com.example.gash.ui.helper.toUiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -73,19 +74,23 @@ class HerdDetailViewModel @Inject constructor(
 
     fun onSearchQueryChange(query: String) {
         searchQuery.value = query
+        _uiState.update { it.copy(searchQuery = query) }
     }
 
     private fun filterAnimals(animals: List<Animal>, query: String): List<Animal> {
-        val normalized = query.trim()
-        if (normalized.isEmpty()) return animals
+        val normalizedQuery = query.normalizedForSearch()
+        if (normalizedQuery.isEmpty()) return animals
         return animals.filter { animal ->
-            animal.id.toString().contains(normalized) ||
-                    animal.activeRfidCode?.contains(normalized, ignoreCase = true) == true ||
-                    animal.tag1?.contains(normalized, ignoreCase = true) == true ||
-                    animal.tag2?.contains(normalized, ignoreCase = true) == true ||
-                    animal.tag3?.contains(normalized, ignoreCase = true) == true
+            animal.id.toString().contains(normalizedQuery) ||
+                    animal.activeRfidCode.containsNormalized(normalizedQuery) ||
+                    animal.tag1.containsNormalized(normalizedQuery) ||
+                    animal.tag2.containsNormalized(normalizedQuery) ||
+                    animal.tag3.containsNormalized(normalizedQuery)
         }
     }
+
+    private fun String?.containsNormalized(normalizedQuery: String): Boolean =
+        this?.normalizedForSearch()?.contains(normalizedQuery) == true
 
     fun onAddClick() {
         _uiState.update {

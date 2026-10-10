@@ -39,7 +39,6 @@ import com.example.gash.R
 import com.example.gash.domain.model.AnimalTags
 import com.example.gash.ui.theme.GashBackground_GRAY
 import com.example.gash.ui.theme.GashError_RED
-import com.example.gash.ui.theme.GashFieldBackground
 import com.example.gash.ui.theme.GashGreen
 import com.example.gash.ui.theme.GashTextPrimary
 
@@ -111,7 +110,7 @@ fun AnimalDetailScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
+                    .padding(horizontal = 20.dp, vertical = 8.dp)
 //                    .offset(y = (-16).dp)
                     .background(Color.White, RoundedCornerShape(16.dp))
                     .padding(vertical = 16.dp),

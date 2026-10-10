@@ -5,6 +5,8 @@ import com.example.gash.ui.helper.UiText
 
 data class HerdManagementUiState(
     val herds: List<Herd> = emptyList(),
+    val searchQuery: String = "",
+    val filteredHerds: List<Herd> = emptyList(),
     val dialogMode: HerdDialogMode? = null,
     val dialogText: String = "",
     val dialogError: UiText? = null,
