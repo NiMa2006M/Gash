@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -30,6 +31,7 @@ import com.example.gash.R
 import com.example.gash.core.navigation.GashRoute
 import com.example.gash.feature.account.accountScreen
 import com.example.gash.feature.filetransfer.fileTransferScreen
+import com.example.gash.feature.home.HomeOperation
 import com.example.gash.feature.home.homeScreen
 import com.example.gash.ui.theme.GashOrange
 
@@ -38,7 +40,8 @@ fun MainScaffold(
     onNavigateToHerdDetail: (Long) -> Unit,
     onNavigateToGeneralInfo: () -> Unit,
     onNavigateToSettings: () -> Unit,
-    onNavigateToAbout: () -> Unit
+    onNavigateToAbout: () -> Unit,
+    onOperationClick: (HomeOperation) -> Unit
 ) {
     val navController = rememberNavController()
     Scaffold(
@@ -50,7 +53,10 @@ fun MainScaffold(
             startDestination = GashRoute.Home,
             modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding())
         ) {
-            homeScreen(onNavigateToHerdDetail = onNavigateToHerdDetail)
+            homeScreen(
+                onNavigateToHerdDetail = onNavigateToHerdDetail,
+                onOperationClick = onOperationClick
+            )
             accountScreen(
                 onNavigateToGeneralInfo = onNavigateToGeneralInfo,
                 onNavigateToSettings = onNavigateToSettings,
@@ -96,7 +102,7 @@ private fun MainBottomBar(navController: NavHostController) {
     }
 }
 
-private inline fun <reified T : Any> androidx.navigation.NavDestination?.isRoute(): Boolean =
+private inline fun <reified T : Any> NavDestination?.isRoute(): Boolean =
     this?.hierarchy?.any { it.hasRoute(T::class) } == true
 
 

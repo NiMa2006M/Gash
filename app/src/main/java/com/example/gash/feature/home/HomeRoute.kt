@@ -8,8 +8,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun HomeRoute(
     onNavigateToHerdDetail: (Long) -> Unit,
+    onOperationClick: (HomeOperation) -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    HomeScreen(uiState = uiState, onNavigateToHerdDetail = onNavigateToHerdDetail)
+    HomeScreen(
+        uiState = uiState,
+        onNavigateToHerdDetail = onNavigateToHerdDetail,
+        onOperationClick = onOperationClick
+    )
 }

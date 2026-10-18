@@ -6,6 +6,8 @@ import com.example.gash.core.database.AppDatabase
 import com.example.gash.core.database.dao.AnimalDao
 import com.example.gash.core.database.dao.HerdDao
 import com.example.gash.core.database.dao.RfidTagDao
+import com.example.gash.core.database.dao.VaccinationDao
+import com.example.gash.core.database.dao.VaccineTypeDao
 import com.example.gash.core.database.dao.WeightRecordDao
 import dagger.Module
 import dagger.Provides
@@ -36,4 +38,10 @@ object DatabaseModule {
 
     @Provides
     fun provideWeightRecordDao(db: AppDatabase): WeightRecordDao = db.weightRecordDao()
+
+    @Provides
+    fun provideVaccineTypeDao(db: AppDatabase): VaccineTypeDao = db.vaccineTypeDao()
+
+    @Provides
+    fun provideVaccinationDao(db: AppDatabase): VaccinationDao = db.vaccinationDao()
 }

@@ -18,7 +18,9 @@ import com.example.gash.feature.account.accountSettingsScreen
 import com.example.gash.feature.activation.activationScreen
 import com.example.gash.feature.animal.animalDetailScreen
 import com.example.gash.feature.herd.herdDetailScreen
+import com.example.gash.feature.home.HomeOperation
 import com.example.gash.feature.welcome.welcomeScreen
+import com.example.gash.feature.vaccination.vaccinationScreen
 
 @Composable
 fun GashApp(viewModel: GashAppViewModel = hiltViewModel()) {
@@ -54,7 +56,13 @@ fun GashApp(viewModel: GashAppViewModel = hiltViewModel()) {
                 onNavigateToHerdDetail = { herdId -> navController.navigate(GashRoute.HerdDetail(herdId)) },
                 onNavigateToGeneralInfo = { navController.navigate(GashRoute.AccountGeneralInfo) },
                 onNavigateToSettings = { navController.navigate(GashRoute.AccountSettings) },
-                onNavigateToAbout = { navController.navigate(GashRoute.AccountAbout) }
+                onNavigateToAbout = { navController.navigate(GashRoute.AccountAbout) },
+                onOperationClick = { operation ->
+                    when (operation) {
+                        HomeOperation.VACCINATION -> navController.navigate(GashRoute.Vaccination)
+                        else -> Unit
+                    }
+                }
             )
         }
 
@@ -68,5 +76,10 @@ fun GashApp(viewModel: GashAppViewModel = hiltViewModel()) {
         accountGeneralInfoScreen(onBack = { navController.popBackStack() })
         accountSettingsScreen(onBack = { navController.popBackStack() })
         accountAboutScreen(onBack = { navController.popBackStack() })
+        vaccinationScreen(
+            onBack = { navController.popBackStack() },
+            onAnimalClick = { animalId -> navController.navigate(GashRoute.AnimalDetail(animalId)) },
+            onNavigateToVaccineSettings = { navController.navigate(GashRoute.AccountSettings) }
+        )
     }
 }

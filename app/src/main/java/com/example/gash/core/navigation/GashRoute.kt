@@ -36,5 +36,7 @@ sealed interface GashRoute {
 
     @Serializable
     data object AccountAbout : GashRoute
+    @Serializable
+    data object Vaccination : GashRoute
 }
 

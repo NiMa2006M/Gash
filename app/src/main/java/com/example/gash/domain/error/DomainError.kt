@@ -20,5 +20,14 @@ sealed class DomainError(cause: Throwable? = null) : Exception(cause) {
 
     class ProfileImageFailed(cause: Throwable? = null) : DomainError(cause)
 
+    data object EmptyVaccineName : DomainError()
+    data object DuplicateVaccineName : DomainError()
+    data object InvalidDose : DomainError()
+    data object RfidTagNotFound : DomainError()
+    class AnimalNotInSelectedHerd(val animalId: Long) : DomainError()
+    data object AnimalAlreadyVaccinatedInOperation : DomainError()
+    data object VaccinationOperationClosed : DomainError()
+    data object VaccinationRecordNotFound : DomainError()
+
     class Unknown(cause: Throwable? = null) : DomainError(cause)
 }

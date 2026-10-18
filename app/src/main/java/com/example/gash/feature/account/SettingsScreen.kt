@@ -162,12 +162,13 @@ fun SettingsScreen(
                     }
                 }
             }
+            VaccineTypesSection()
         }
     }
 }
 
 @Composable
-private fun SectionTitle(title: String) {
+internal fun SectionTitle(title: String) {
     Text(
         text = title,
         color = GashTextSecondary,
