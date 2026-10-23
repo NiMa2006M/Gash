@@ -13,6 +13,7 @@ val GashText_DARKGREEN = Color(0xFF0E2511)
 val GashTextSecondary = Color(0xFF626E94)
 val GashText_GRAY= Color(0xFF626E94)
 val GashText_CYAN = Color(0xFF7EBAAB)
+val GashOptionBorder = Color(0xFFC4CAD6)
 
 
 //BUTTON

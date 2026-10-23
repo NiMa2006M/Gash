@@ -113,7 +113,7 @@ fun VaccinationSheetsAndDialogs(
                 Text(
                     stringResource(
                         R.string.vaccination_mismatch_message,
-                        prompt.animalId,
+                        prompt.rfidCode,
                         uiState.herdName.orEmpty()
                     )
                 )
@@ -135,8 +135,14 @@ fun VaccinationSheetsAndDialogs(
         AlertDialog(
             onDismissRequest = actions.onDismissDeleteRecord,
             title = { Text(stringResource(R.string.vaccination_delete_title)) },
-            text = { Text(stringResource(R.string.vaccination_delete_message, record.animalId)) },
-            confirmButton = {
+            text = {
+                Text(
+                    stringResource(
+                        R.string.vaccination_delete_message,
+                        record.scannedRfidCode ?: stringResource(R.string.vaccination_rfid_unknown)
+                    )
+                )
+            },            confirmButton = {
                 TextButton(onClick = actions.onConfirmDeleteRecord) {
                     Text(stringResource(R.string.common_btn_delete))
                 }

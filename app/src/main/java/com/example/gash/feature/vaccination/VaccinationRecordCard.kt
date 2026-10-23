@@ -28,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gash.R
@@ -71,15 +72,17 @@ fun VaccinationRecordCard(
 
             Spacer(Modifier.width(12.dp))
 
-            Column(modifier = Modifier.weight(1f).padding(vertical = 8.dp)) {
+            Column(modifier = Modifier.weight(1f).padding(vertical = 10.dp)) {
                 Text(
-                    text = stringResource(R.string.animal_list_item_title, record.animalId),
+                    text = record.scannedRfidCode
+                        ?: stringResource(R.string.vaccination_rfid_unknown),
                     color = GashTextPrimary,
                     fontSize = 15.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
-                val subtitle = record.scannedRfidCode?.let { "RFID: $it · $timeText" } ?: timeText
-                Text(text = subtitle, color = GashTextSecondary, fontSize = 12.sp)
+                Text(text = timeText, color = GashTextSecondary, fontSize = 12.sp)
             }
 
             IconButton(onClick = onDeleteClick) {

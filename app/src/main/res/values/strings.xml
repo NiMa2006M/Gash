@@ -77,6 +77,9 @@
     <string name="error_animal_already_vaccinated">This animal is already registered in this operation</string>
     <string name="error_vaccination_operation_closed">This operation is already closed</string>
     <string name="error_vaccination_record_not_found">Entry not found</string>
+    <string name="error_nothing_to_export">There is nothing to export</string>
+    <string name="error_export_source_not_found">This item was not found</string>
+    <string name="error_export_failed">Couldn\'t create the file. Please try again.</string>
 
     <!-- HOME -->
     <string name="operation_milking">Milking</string>
@@ -190,7 +193,7 @@
     <string name="vaccine_type_archive_title">Remove Vaccine</string>
     <string name="vaccine_type_archive_message">“%1$s” will be removed from the selection list. Past operations that used it stay intact.</string>
 
-    <!-- Vaccination -->
+    <!-- VACCINATION -->
     <string name="vaccination_title">Vaccination</string>
     <string name="vaccination_header_new_operation">New operation</string>
     <string name="vaccination_header_subtitle">Operation #%1$d · %2$s</string>
@@ -217,18 +220,19 @@
     <string name="vaccination_settings_required_body">Vaccine type and injection site are required.</string>
     <string name="vaccination_go_to_settings">Go to settings</string>
     <string name="vaccination_rfid_hint">Scan or enter RFID</string>
-    <string name="vaccination_registered_success">Animal #%1$d registered</string>
-    <string name="vaccination_count">%1$d registered</string>
-    <string name="vaccination_count_of_herd">%1$d of %2$d in herd</string>
+    <string name="vaccination_registered_success">RFID %1$s registered</string>
+    <string name="vaccination_count_label">registered</string>
+    <string name="vaccination_rfid_unknown">Unknown RFID</string>
+    <string name="vaccination_count_of_herd_value">%1$d/%2$d</string>
     <string name="vaccination_records_empty">No animals registered yet</string>
     <string name="vaccination_picker_vaccine_title">Select Vaccine Type</string>
     <string name="vaccination_picker_vaccine_empty">No vaccines defined yet</string>
     <string name="vaccination_define_vaccines">Define vaccines</string>
     <string name="vaccination_picker_herd_title">Select Herd</string>
     <string name="vaccination_mismatch_title">Animal is not in the selected herd</string>
-    <string name="vaccination_mismatch_message">Animal #%1$d is not in herd “%2$s”. Register the vaccination anyway?</string>
+    <string name="vaccination_mismatch_message">Animal with RFID %1$s is not in herd “%2$s”. Register the vaccination anyway?</string>
     <string name="vaccination_delete_title">Remove Entry</string>
-    <string name="vaccination_delete_message">Remove the vaccination entry for animal #%1$d?</string>
+    <string name="vaccination_delete_message">Remove the vaccination entry for RFID %1$s?</string>
     <string name="vaccination_finish_title">Finish Operation</string>
     <string name="vaccination_finish_message">Operation #%1$d will be closed with %2$d animals and can\'t be edited anymore.</string>
     <string name="vaccination_section_required">Required</string>
@@ -239,7 +243,7 @@
     <string name="vaccination_operator_recent">Recent</string>
     <string name="vaccination_settings_incomplete_hint">Select the vaccine type and injection site to continue</string>
 
-    <!-- File transfer -->
+    <!-- FILE TRANSFER -->
     <string name="file_transfer_title">Send File</string>
     <string name="file_transfer_subtitle">Send your data as an Excel file</string>
     <string name="file_transfer_choose_data">Choose the data to send</string>
@@ -259,12 +263,7 @@
     <string name="file_transfer_no_internet_message">You need to be online to send files. Check your connection and try again.</string>
     <string name="file_transfer_retry">Try again</string>
 
-    <!-- Errors -->
-    <string name="error_nothing_to_export">There is nothing to export</string>
-    <string name="error_export_source_not_found">This item was not found</string>
-    <string name="error_export_failed">Couldn\'t create the file. Please try again.</string>
-
-    <!-- Excel sheets & columns -->
+    <!-- EXCEL SHEETS & COLUMNS -->
     <string name="export_sheet_animals">Animals</string>
     <string name="export_sheet_weight_history">Weight history</string>
     <string name="export_sheet_vaccination">Operation %1$d</string>

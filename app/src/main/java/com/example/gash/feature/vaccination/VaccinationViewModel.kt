@@ -164,7 +164,7 @@ class VaccinationViewModel @Inject constructor(
                         it.copy(
                             isSubmitting = false,
                             rfidText = "",
-                            feedback = RegisterFeedback.Success(registration.animalId)
+                            feedback = RegisterFeedback.Success(rfidCode.trim())
                         )
                     }
                 }

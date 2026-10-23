@@ -14,7 +14,7 @@ enum class VaccinationTab { REGISTER, SETTINGS }
 enum class SettingsPicker { VACCINE_TYPE, HERD }
 
 sealed interface RegisterFeedback {
-    data class Success(val animalId: Long) : RegisterFeedback
+    data class Success(val rfidCode: String) : RegisterFeedback
     data class Failure(val message: UiText) : RegisterFeedback
 }
 

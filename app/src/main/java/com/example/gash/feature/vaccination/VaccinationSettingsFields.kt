@@ -43,6 +43,7 @@ import com.example.gash.ui.theme.GashBorder
 import com.example.gash.ui.theme.GashError_RED
 import com.example.gash.ui.theme.GashFieldBackground
 import com.example.gash.ui.theme.GashGreen
+import com.example.gash.ui.theme.GashOptionBorder
 import com.example.gash.ui.theme.GashSurface
 import com.example.gash.ui.theme.GashTextPrimary
 import com.example.gash.ui.theme.GashTextSecondary
@@ -195,7 +196,6 @@ fun SettingsTextField(
         }
     }
 }
-
 @Composable
 fun InjectionSiteSelector(
     selected: InjectionSite?,
@@ -207,21 +207,23 @@ fun InjectionSiteSelector(
         SettingsFieldLabel(stringResource(R.string.vaccination_field_site), required = true)
         Spacer(Modifier.height(6.dp))
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(FieldShape)
-                .background(GashFieldBackground)
-                .padding(4.dp),
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             InjectionSite.entries.forEach { site ->
                 val isSelected = site == selected
+                val optionShape = RoundedCornerShape(12.dp)
                 Box(
                     modifier = Modifier
                         .weight(1f)
-                        .heightIn(min = 44.dp)
-                        .clip(RoundedCornerShape(11.dp))
-                        .background(if (isSelected) GashGreen else Color.Transparent)
+                        .heightIn(min = 48.dp)
+                        .clip(optionShape)
+                        .background(if (isSelected) GashGreen else GashFieldBackground)
+                        .border(
+                            width = 1.dp,
+                            color = if (isSelected) GashGreen else GashOptionBorder,
+                            shape = optionShape
+                        )
                         .selectable(
                             selected = isSelected,
                             enabled = enabled,

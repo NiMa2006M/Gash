@@ -1,6 +1,7 @@
 package com.example.gash.feature.vaccination
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,13 +34,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gash.R
 import com.example.gash.core.operation.OperationBottomButton
+import com.example.gash.ui.theme.GashBorder
 import com.example.gash.ui.theme.GashError_RED
 import com.example.gash.ui.theme.GashFieldBackground
 import com.example.gash.ui.theme.GashGreen
+import com.example.gash.ui.theme.GashSurface
 import com.example.gash.ui.theme.GashTextPrimary
 import com.example.gash.ui.theme.GashTextSecondary
 
@@ -91,6 +96,10 @@ private fun RegisterContent(
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(onDone = { actions.onRegisterClick() }),
                     shape = RoundedCornerShape(14.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = GashGreen,
+                        cursorColor = GashGreen
+                    ),
                     modifier = Modifier.weight(1f).focusRequester(focusRequester)
                 )
                 Button(
@@ -106,7 +115,7 @@ private fun RegisterContent(
 
             when (val feedback = uiState.feedback) {
                 is RegisterFeedback.Success -> Text(
-                    text = stringResource(R.string.vaccination_registered_success, feedback.animalId),
+                    text = stringResource(R.string.vaccination_registered_success, feedback.rfidCode),
                     color = GashGreen,
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Medium
@@ -120,19 +129,19 @@ private fun RegisterContent(
                 null -> Unit
             }
 
-            Text(
-                text = if (uiState.herdAnimalCount != null) {
-                    stringResource(
-                        R.string.vaccination_count_of_herd,
-                        uiState.records.size,
-                        uiState.herdAnimalCount
-                    )
-                } else {
-                    stringResource(R.string.vaccination_count, uiState.records.size)
-                },
-                color = GashTextSecondary,
-                fontSize = 13.sp
-            )
+//            Text(
+//                text = if (uiState.herdAnimalCount != null) {
+//                    stringResource(
+//                        R.string.vaccination_count_of_herd,
+//                        uiState.records.size,
+//                        uiState.herdAnimalCount
+//                    )
+//                } else {
+//                    stringResource(R.string.vaccination_count, uiState.records.size)
+//                },
+//                color = GashTextSecondary,
+//                fontSize = 13.sp
+//            )
         }
 
         if (uiState.records.isEmpty()) {
@@ -165,30 +174,90 @@ private fun RegisterContent(
         )
     }
 }
-
 @Composable
 private fun SettingsSummaryCard(uiState: VaccinationUiState) {
     val siteLabel = uiState.injectionSite?.let { stringResource(it.labelRes()) }
     val doseLabel = uiState.doseValue?.takeIf { uiState.doseText.isNotBlank() }
         ?.let { stringResource(R.string.vaccination_dose_value, formatDose(it)) }
+    val details = listOfNotNull(doseLabel, uiState.herdName).joinToString(" · ")
 
-    val details = listOfNotNull(siteLabel, doseLabel, uiState.herdName).joinToString(" · ")
-
-    Column(
+    val shape = RoundedCornerShape(14.dp)
+    Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(GashFieldBackground, RoundedCornerShape(14.dp))
-            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .background(GashFieldBackground, shape)
+            .padding(start = 16.dp, end = 10.dp, top = 10.dp, bottom = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = uiState.vaccineType?.name.orEmpty(),
+                    color = GashTextPrimary,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f, fill = false)
+                )
+                if (siteLabel != null) {
+                    Text(
+                        text = siteLabel,
+                        color = GashTextSecondary,
+                        fontSize = 11.sp,
+                        maxLines = 1,
+                        modifier = Modifier
+                            .background(GashSurface, RoundedCornerShape(50))
+                            .border(1.dp, GashBorder, RoundedCornerShape(50))
+                            .padding(horizontal = 8.dp, vertical = 2.dp)
+                    )
+                }
+            }
+            if (details.isNotEmpty()) {
+                Text(
+                    text = details,
+                    color = GashTextSecondary,
+                    fontSize = 12.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
+        RegisteredCountBadge(
+            registered = uiState.records.size,
+            herdCount = uiState.herdAnimalCount
+        )
+    }
+}
+
+@Composable
+private fun RegisteredCountBadge(registered: Int, herdCount: Int?) {
+    val countText = if (herdCount != null) {
+        stringResource(R.string.vaccination_count_of_herd_value, registered, herdCount)
+    } else {
+        registered.toString()
+    }
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .background(GashGreen.copy(alpha = 0.12f), RoundedCornerShape(12.dp))
+            .padding(horizontal = 12.dp, vertical = 6.dp)
     ) {
         Text(
-            text = uiState.vaccineType?.name.orEmpty(),
-            color = GashTextPrimary,
-            fontSize = 16.sp,
+            text = countText,
+            color = GashGreen,
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
-        if (details.isNotEmpty()) {
-            Text(text = details, color = GashTextSecondary, fontSize = 12.sp)
-        }
+        Text(
+            text = stringResource(R.string.vaccination_count_label),
+            color = GashGreen,
+            fontSize = 10.sp
+        )
     }
 }
 

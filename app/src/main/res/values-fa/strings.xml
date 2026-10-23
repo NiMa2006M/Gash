@@ -78,6 +78,9 @@
     <string name="error_animal_already_vaccinated">این دام قبلاً تو همین عملیات ثبت شده</string>
     <string name="error_vaccination_operation_closed">این عملیات بسته شده</string>
     <string name="error_vaccination_record_not_found">این ثبت پیدا نشد</string>
+    <string name="error_nothing_to_export">داده‌ای برای ارسال وجود ندارد</string>
+    <string name="error_export_source_not_found">این مورد پیدا نشد</string>
+    <string name="error_export_failed">ساخت فایل ناموفق بود. دوباره تلاش کن.</string>
 
     <!-- HOME -->
     <string name="operation_milking">شیردوشی</string>
@@ -191,7 +194,7 @@
     <string name="vaccine_type_archive_title">حذف واکسن</string>
     <string name="vaccine_type_archive_message">«%1$s» از لیست انتخاب حذف می‌شه. عملیات‌های قبلی که با این واکسن انجام شدن دست‌نخورده می‌مونن.</string>
 
-    <!-- Vaccination -->
+    <!-- VACCINATION -->
     <string name="vaccination_title">عملیات واکسن</string>
     <string name="vaccination_header_new_operation">عملیات جدید</string>
     <string name="vaccination_header_subtitle">عملیات شماره %1$d · %2$s</string>
@@ -218,18 +221,19 @@
     <string name="vaccination_settings_required_body">نوع واکسن و محل تزریق باید مشخص باشن.</string>
     <string name="vaccination_go_to_settings">رفتن به تنظیمات</string>
     <string name="vaccination_rfid_hint">RFID را اسکن یا وارد کنید</string>
-    <string name="vaccination_registered_success">دام #%1$d ثبت شد</string>
-    <string name="vaccination_count">%1$d راس ثبت شده</string>
-    <string name="vaccination_count_of_herd">%1$d از %2$d راسِ گله</string>
+    <string name="vaccination_registered_success">RFID %1$s ثبت شد</string>
+    <string name="vaccination_count_label">ثبت‌شده</string>
+    <string name="vaccination_rfid_unknown">RFID نامشخص</string>
+    <string name="vaccination_count_of_herd_value">%1$d/%2$d</string>
     <string name="vaccination_records_empty">هنوز هیچ دامی ثبت نشده</string>
     <string name="vaccination_picker_vaccine_title">انتخاب نوع واکسن</string>
     <string name="vaccination_picker_vaccine_empty">هنوز واکسنی تعریف نشده</string>
     <string name="vaccination_define_vaccines">تعریف واکسن</string>
     <string name="vaccination_picker_herd_title">انتخاب گله</string>
     <string name="vaccination_mismatch_title">دام تو گله‌ی انتخابی نیست</string>
-    <string name="vaccination_mismatch_message">دام #%1$d جزو گله‌ی «%2$s» نیست. با این حال واکسنش ثبت بشه؟</string>
+    <string name="vaccination_mismatch_message">دامِ دارای RFID %1$s جزو گله‌ی «%2$s» نیست. با این حال واکسنش ثبت بشه؟</string>
     <string name="vaccination_delete_title">حذف ثبت</string>
-    <string name="vaccination_delete_message">ثبت واکسنِ دام #%1$d حذف بشه؟</string>
+    <string name="vaccination_delete_message">ثبت واکسنِ RFID %1$s حذف بشه؟</string>
     <string name="vaccination_finish_title">پایان عملیات</string>
     <string name="vaccination_finish_message">عملیات شماره %1$d با %2$d راس بسته می‌شه و دیگه قابل ویرایش نیست.</string>
     <string name="vaccination_section_required">الزامی</string>
@@ -240,7 +244,7 @@
     <string name="vaccination_operator_recent">اخیر</string>
     <string name="vaccination_settings_incomplete_hint">برای ادامه، نوع واکسن و محل تزریق را انتخاب کن</string>
 
-    <!-- ارسال فایل -->
+    <!-- FILE TRANSFER -->
     <string name="file_transfer_title">ارسال فایل</string>
     <string name="file_transfer_subtitle">داده‌ها را به‌صورت اکسل بفرست</string>
     <string name="file_transfer_choose_data">داده‌ی مورد نظر را انتخاب کن</string>
@@ -260,12 +264,7 @@
     <string name="file_transfer_no_internet_message">برای ارسال فایل باید به اینترنت وصل باشی. اتصالت را بررسی کن و دوباره امتحان کن.</string>
     <string name="file_transfer_retry">تلاش دوباره</string>
 
-    <!-- خطاها -->
-    <string name="error_nothing_to_export">داده‌ای برای ارسال وجود ندارد</string>
-    <string name="error_export_source_not_found">این مورد پیدا نشد</string>
-    <string name="error_export_failed">ساخت فایل ناموفق بود. دوباره تلاش کن.</string>
-
-    <!-- ستون‌ها و شیت‌های اکسل -->
+    <!-- EXCEL SHEETS & COLUMNS -->
     <string name="export_sheet_animals">گوسفندها</string>
     <string name="export_sheet_weight_history">تاریخچه وزن</string>
     <string name="export_sheet_vaccination">عملیات %1$d</string>
