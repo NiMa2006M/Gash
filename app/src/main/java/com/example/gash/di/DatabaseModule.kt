@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.gash.core.database.AppDatabase
 import com.example.gash.core.database.dao.AnimalDao
+import com.example.gash.core.database.dao.ExportDao
 import com.example.gash.core.database.dao.HerdDao
 import com.example.gash.core.database.dao.RfidTagDao
 import com.example.gash.core.database.dao.VaccinationDao
@@ -44,4 +45,7 @@ object DatabaseModule {
 
     @Provides
     fun provideVaccinationDao(db: AppDatabase): VaccinationDao = db.vaccinationDao()
+
+    @Provides
+    fun provideExportDao(db: AppDatabase): ExportDao = db.exportDao()
 }

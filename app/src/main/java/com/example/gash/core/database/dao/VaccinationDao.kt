@@ -13,6 +13,16 @@ data class VaccinationOperationRow(
     val vaccineTypeName: String
 )
 
+data class VaccinationOperationSummaryRow(
+    val id: Long,
+    val vaccineTypeName: String,
+    val startedAt: Long,
+    val finishedAt: Long?,
+    val herdName: String?,
+    val operatorName: String?,
+    val recordCount: Int
+)
+
 @Dao
 interface VaccinationDao {
 
@@ -75,4 +85,17 @@ interface VaccinationDao {
     """
     )
     fun observeRecentOperatorNames(limit: Int): Flow<List<String>>
+
+    @Query(
+        """
+    SELECT op.id AS id, vt.name AS vaccineTypeName, op.startedAt AS startedAt,
+           op.finishedAt AS finishedAt, op.herdNameSnapshot AS herdName,
+           op.operatorName AS operatorName,
+           (SELECT COUNT(*) FROM vaccination_records r WHERE r.operationId = op.id) AS recordCount
+    FROM vaccination_operations op
+    INNER JOIN vaccine_types vt ON vt.id = op.vaccineTypeId
+    ORDER BY op.id DESC
+    """
+    )
+    fun observeOperationSummaries(): Flow<List<VaccinationOperationSummaryRow>>
 }

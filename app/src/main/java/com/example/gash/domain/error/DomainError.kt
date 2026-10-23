@@ -28,6 +28,9 @@ sealed class DomainError(cause: Throwable? = null) : Exception(cause) {
     data object AnimalAlreadyVaccinatedInOperation : DomainError()
     data object VaccinationOperationClosed : DomainError()
     data object VaccinationRecordNotFound : DomainError()
+    data object NothingToExport : DomainError()
+    data object ExportSourceNotFound : DomainError()
 
+    class ExportFailed(cause: Throwable? = null) : DomainError(cause)
     class Unknown(cause: Throwable? = null) : DomainError(cause)
 }

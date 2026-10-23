@@ -217,7 +217,7 @@
     <string name="vaccination_settings_required_title">اول تنظیمات را کامل کن</string>
     <string name="vaccination_settings_required_body">نوع واکسن و محل تزریق باید مشخص باشن.</string>
     <string name="vaccination_go_to_settings">رفتن به تنظیمات</string>
-    <string name="vaccination_rfid_hint">RFID را اسکن کنید یا وارد کنید</string>
+    <string name="vaccination_rfid_hint">RFID را اسکن یا وارد کنید</string>
     <string name="vaccination_registered_success">دام #%1$d ثبت شد</string>
     <string name="vaccination_count">%1$d راس ثبت شده</string>
     <string name="vaccination_count_of_herd">%1$d از %2$d راسِ گله</string>
@@ -240,12 +240,57 @@
     <string name="vaccination_operator_recent">اخیر</string>
     <string name="vaccination_settings_incomplete_hint">برای ادامه، نوع واکسن و محل تزریق را انتخاب کن</string>
 
+    <!-- ارسال فایل -->
+    <string name="file_transfer_title">ارسال فایل</string>
+    <string name="file_transfer_subtitle">داده‌ها را به‌صورت اکسل بفرست</string>
+    <string name="file_transfer_choose_data">داده‌ی مورد نظر را انتخاب کن</string>
+    <string name="file_transfer_option_animals_title">لیست گوسفندها و وزن‌ها</string>
+    <string name="file_transfer_option_animals_desc">مشخصات هر دام، آخرین وزن و تاریخچه‌ی وزن</string>
+    <string name="file_transfer_option_vaccination_title">عملیات واکسن</string>
+    <string name="file_transfer_option_vaccination_desc">اکسل یکی از عملیات‌ها، با شماره‌ی عملیات</string>
+    <string name="file_transfer_choose_operation">شماره‌ی عملیات را انتخاب کن</string>
+    <string name="file_transfer_operations_empty">هنوز عملیات واکسنی ثبت نشده</string>
+    <string name="file_transfer_operation_title">عملیات شماره %1$d</string>
+    <string name="file_transfer_operation_animals_count">%1$d راس</string>
+    <string name="file_transfer_operation_in_progress">در حال انجام</string>
+    <string name="file_transfer_btn_send">ساخت و ارسال اکسل</string>
+    <string name="file_transfer_creating">در حال ساخت فایل…</string>
+    <string name="file_transfer_share_chooser_title">ارسال فایل با…</string>
+    <string name="file_transfer_no_internet_title">اینترنت وصل نیست</string>
+    <string name="file_transfer_no_internet_message">برای ارسال فایل باید به اینترنت وصل باشی. اتصالت را بررسی کن و دوباره امتحان کن.</string>
+    <string name="file_transfer_retry">تلاش دوباره</string>
+
+    <!-- خطاها -->
+    <string name="error_nothing_to_export">داده‌ای برای ارسال وجود ندارد</string>
+    <string name="error_export_source_not_found">این مورد پیدا نشد</string>
+    <string name="error_export_failed">ساخت فایل ناموفق بود. دوباره تلاش کن.</string>
+
+    <!-- ستون‌ها و شیت‌های اکسل -->
+    <string name="export_sheet_animals">گوسفندها</string>
+    <string name="export_sheet_weight_history">تاریخچه وزن</string>
+    <string name="export_sheet_vaccination">عملیات %1$d</string>
+    <string name="export_col_animal_number">شماره دام</string>
+    <string name="export_col_rfid">RFID</string>
+    <string name="export_col_herd">گله</string>
+    <string name="export_col_registered_at">تاریخ ثبت دام</string>
+    <string name="export_col_last_weight">آخرین وزن (kg)</string>
+    <string name="export_col_last_weight_date">تاریخ آخرین وزن</string>
+    <string name="export_col_weight">وزن (kg)</string>
+    <string name="export_col_weight_date">تاریخ وزن‌کشی</string>
+    <string name="export_col_operation_number">شماره عملیات</string>
+    <string name="export_col_vaccine">واکسن</string>
+    <string name="export_col_site">محل تزریق</string>
+    <string name="export_col_dose">دوز (ml)</string>
+    <string name="export_col_operator">اپراتور</string>
+    <string name="export_col_operation_herd">گله‌ی عملیات</string>
+    <string name="export_col_record_time">زمان ثبت واکسن</string>
+    <string name="export_col_animal_current_herd">گله‌ی فعلی دام</string>
+
     <string name="about_copyright">تمامی حقوق این اپلیکیشن محفوظ است</string>
 
     <!-- DEMO -->
     <string name="activation_success">فعال‌سازی موفق! صفحه‌ی Home بعداً اینجا میاد</string>
     <string name="account_placeholder">صفحه‌ی حساب کاربری به‌زودی اینجا میاد</string>
-    <string name="file_transfer_placeholder">صفحه‌ی ارسال فایل به‌زودی اینجا میاد</string>
     <string name="herd_management_placeholder">صفحه‌ی مدیریت گله به‌زودی اینجا میاد</string>
     <string name="weight_placeholder">صفحه‌ی وزن‌کشی به‌زودی اینجا میاد</string>
 

@@ -23,6 +23,9 @@ fun DomainError.toUiText(): UiText = when (this) {
     is DomainError.VaccinationOperationClosed -> UiText.StringResource(R.string.error_vaccination_operation_closed)
     is DomainError.VaccinationRecordNotFound -> UiText.StringResource(R.string.error_vaccination_record_not_found)
     is DomainError.Unknown -> UiText.StringResource(R.string.common_error_unknown)
+    is DomainError.NothingToExport -> UiText.StringResource(R.string.error_nothing_to_export)
+    is DomainError.ExportSourceNotFound -> UiText.StringResource(R.string.error_export_source_not_found)
+    is DomainError.ExportFailed -> UiText.StringResource(R.string.error_export_failed)
 }
 
 fun Throwable.toUiText(): UiText =

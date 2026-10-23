@@ -6,6 +6,6 @@ import com.example.gash.core.navigation.GashRoute
 
 fun NavGraphBuilder.fileTransferScreen() {
     composable<GashRoute.FileTransfer> {
-        FileTransferScreen()
+        FileTransferRoute()
     }
 }

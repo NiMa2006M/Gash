@@ -5,6 +5,7 @@ import com.example.gash.core.database.entity.VaccinationOperationEntity
 import com.example.gash.core.database.entity.VaccinationRecordEntity
 import com.example.gash.data.mapper.toDomain
 import com.example.gash.domain.model.VaccinationOperation
+import com.example.gash.domain.model.VaccinationOperationSummary
 import com.example.gash.domain.model.VaccinationRecord
 import com.example.gash.domain.model.VaccinationSettings
 import com.example.gash.domain.repository.VaccinationRepository
@@ -65,6 +66,9 @@ class VaccinationRepositoryImpl @Inject constructor(
 
     override fun observeRecentOperatorNames(): Flow<List<String>> =
         dao.observeRecentOperatorNames(RECENT_OPERATOR_LIMIT)
+
+    override fun observeOperationSummaries(): Flow<List<VaccinationOperationSummary>> =
+        dao.observeOperationSummaries().map { list -> list.map { it.toDomain() } }
 
     private companion object {
         const val RECENT_OPERATOR_LIMIT = 8

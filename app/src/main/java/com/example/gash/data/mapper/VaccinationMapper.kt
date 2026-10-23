@@ -1,10 +1,12 @@
 package com.example.gash.data.mapper
 
 import com.example.gash.core.database.dao.VaccinationOperationRow
+import com.example.gash.core.database.dao.VaccinationOperationSummaryRow
 import com.example.gash.core.database.entity.VaccinationRecordEntity
 import com.example.gash.core.database.entity.VaccineTypeEntity
 import com.example.gash.domain.model.InjectionSite
 import com.example.gash.domain.model.VaccinationOperation
+import com.example.gash.domain.model.VaccinationOperationSummary
 import com.example.gash.domain.model.VaccinationRecord
 import com.example.gash.domain.model.VaccineType
 
@@ -30,4 +32,14 @@ fun VaccinationRecordEntity.toDomain(): VaccinationRecord = VaccinationRecord(
     animalId = animalId,
     scannedRfidCode = scannedRfidCode,
     recordedAt = recordedAt
+)
+
+fun VaccinationOperationSummaryRow.toDomain(): VaccinationOperationSummary = VaccinationOperationSummary(
+    id = id,
+    vaccineTypeName = vaccineTypeName,
+    startedAt = startedAt,
+    finishedAt = finishedAt,
+    herdName = herdName,
+    operatorName = operatorName,
+    recordCount = recordCount
 )

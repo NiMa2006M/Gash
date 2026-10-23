@@ -239,12 +239,57 @@
     <string name="vaccination_operator_recent">Recent</string>
     <string name="vaccination_settings_incomplete_hint">Select the vaccine type and injection site to continue</string>
 
+    <!-- File transfer -->
+    <string name="file_transfer_title">Send File</string>
+    <string name="file_transfer_subtitle">Send your data as an Excel file</string>
+    <string name="file_transfer_choose_data">Choose the data to send</string>
+    <string name="file_transfer_option_animals_title">Sheep list &amp; weights</string>
+    <string name="file_transfer_option_animals_desc">Each animal\'s details, latest weight and weight history</string>
+    <string name="file_transfer_option_vaccination_title">Vaccination operation</string>
+    <string name="file_transfer_option_vaccination_desc">Excel of one operation, picked by its number</string>
+    <string name="file_transfer_choose_operation">Choose the operation number</string>
+    <string name="file_transfer_operations_empty">No vaccination operations yet</string>
+    <string name="file_transfer_operation_title">Operation #%1$d</string>
+    <string name="file_transfer_operation_animals_count">%1$d animals</string>
+    <string name="file_transfer_operation_in_progress">In progress</string>
+    <string name="file_transfer_btn_send">Create &amp; send Excel</string>
+    <string name="file_transfer_creating">Creating file…</string>
+    <string name="file_transfer_share_chooser_title">Send file via…</string>
+    <string name="file_transfer_no_internet_title">No internet connection</string>
+    <string name="file_transfer_no_internet_message">You need to be online to send files. Check your connection and try again.</string>
+    <string name="file_transfer_retry">Try again</string>
+
+    <!-- Errors -->
+    <string name="error_nothing_to_export">There is nothing to export</string>
+    <string name="error_export_source_not_found">This item was not found</string>
+    <string name="error_export_failed">Couldn\'t create the file. Please try again.</string>
+
+    <!-- Excel sheets & columns -->
+    <string name="export_sheet_animals">Animals</string>
+    <string name="export_sheet_weight_history">Weight history</string>
+    <string name="export_sheet_vaccination">Operation %1$d</string>
+    <string name="export_col_animal_number">Animal #</string>
+    <string name="export_col_rfid">RFID</string>
+    <string name="export_col_herd">Herd</string>
+    <string name="export_col_registered_at">Registered at</string>
+    <string name="export_col_last_weight">Latest weight (kg)</string>
+    <string name="export_col_last_weight_date">Latest weight date</string>
+    <string name="export_col_weight">Weight (kg)</string>
+    <string name="export_col_weight_date">Weighed at</string>
+    <string name="export_col_operation_number">Operation #</string>
+    <string name="export_col_vaccine">Vaccine</string>
+    <string name="export_col_site">Injection site</string>
+    <string name="export_col_dose">Dose (ml)</string>
+    <string name="export_col_operator">Operator</string>
+    <string name="export_col_operation_herd">Operation herd</string>
+    <string name="export_col_record_time">Vaccinated at</string>
+    <string name="export_col_animal_current_herd">Animal\'s current herd</string>
+
     <string name="about_copyright">All rights reserved</string>
 
     <!-- DEMO -->
     <string name="activation_success">Activation successful! Home screen coming soon</string>
     <string name="account_placeholder">Account screen coming soon</string>
-    <string name="file_transfer_placeholder">File transfer screen coming soon</string>
     <string name="herd_management_placeholder">Herd management screen coming soon</string>
     <string name="weight_placeholder">Weight screen coming soon</string>
 

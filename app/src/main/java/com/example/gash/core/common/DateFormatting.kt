@@ -14,3 +14,6 @@ fun formatDateTime(millis: Long, locale: Locale): String =
 
 fun formatTime(millis: Long, locale: Locale): String =
     DateFormat.getTimeInstance(DateFormat.SHORT, uLocaleFor(locale)).format(Date(millis))
+
+fun formatDate(millis: Long, locale: Locale): String =
+    DateFormat.getDateInstance(DateFormat.SHORT, uLocaleFor(locale)).format(Date(millis))

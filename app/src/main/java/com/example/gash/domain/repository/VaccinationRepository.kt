@@ -1,6 +1,7 @@
 package com.example.gash.domain.repository
 
 import com.example.gash.domain.model.VaccinationOperation
+import com.example.gash.domain.model.VaccinationOperationSummary
 import com.example.gash.domain.model.VaccinationRecord
 import com.example.gash.domain.model.VaccinationSettings
 import kotlinx.coroutines.flow.Flow
@@ -18,4 +19,5 @@ interface VaccinationRepository {
     suspend fun deleteRecord(recordId: Long)
     suspend fun countRecords(operationId: Long): Int
     fun observeRecentOperatorNames(): Flow<List<String>>
+    fun observeOperationSummaries(): Flow<List<VaccinationOperationSummary>>
 }
