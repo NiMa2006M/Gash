@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gash</string>
+    <string name="app_name">Gaash</string>
     <string name="app_slogan">Leading the way in modern livestock management</string>
 
     <!-- COMMON BUTTONS -->
@@ -168,7 +168,7 @@
     <string name="account_general_info_dec">Livestock farm name, ID, and contact number</string>
     <string name="account_settings">Settings</string>
     <string name="account_settings_dec">App language and tag settings</string>
-    <string name="account_about">About Gash</string>
+    <string name="account_about">About Gaash</string>
     <string name="account_about_dec">App Information and Version</string>
     <string name="general_info_saved">Saved successfully</string>
     <string name="general_info_change_photo">Change photo</string>
